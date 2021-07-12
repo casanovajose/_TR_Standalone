@@ -1,4 +1,4 @@
-#N canvas 343 1005 953 633 10;
+#N canvas 963 713 953 633 10;
 #X obj 499 39 cnv 15 449 319 empty empty Funciones 20 12 0 14 #e0e0e0
 #404040 0;
 #N canvas 1393 434 450 300 (subpatch) 0;
@@ -192,5 +192,6 @@
 #X msg 31 288 \; pd dsp 1;
 #X msg 32 351 \; pd dsp 0;
 #X obj 30 251 loadbang;
-#X obj 88 58 main;
+#X obj 88 58 _TR_main;
+#X obj 410 180;
 #X connect 18 0 16 0;
