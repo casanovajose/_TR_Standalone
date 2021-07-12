@@ -1,4 +1,4 @@
-#N canvas 263 538 1252 575 10;
+#N canvas 263 514 1252 575 10;
 #X obj 135 193 tabread R;
 #X obj 47 196 tabread L;
 #X obj 379 167 tabread reverb;
