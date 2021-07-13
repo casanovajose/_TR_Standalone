@@ -1,4 +1,4 @@
-#N canvas 328 198 1209 667 10;
+#N canvas 604 143 1211 668 10;
 #X obj 160 160 spaces/stereo_lr~;
 #X obj 180 230 mixers/stereo_lr_rev~;
 #X obj 303 182 r main_amp;
@@ -10,8 +10,21 @@
 #X msg 460 140 goto \$1 \$2;
 #X obj 458 113 pack f f;
 #X obj 460 164 s grid;
-#X obj 100 100 noise~;
-#X msg 120 20 port 3333;
+#X obj 10 100 noise~;
+#X obj 60 130 processors/atack_decay~;
+#X obj 93 100 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 127 100 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 150 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 20 256 0;
+#X obj 220 10 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 85 256 0;
+#X obj 40 70 bp~ 50 0;
+#X obj 90 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 2 256 0;
+#X obj 30 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 646 256 0;
 #X connect 0 0 1 0;
 #X connect 0 1 1 1;
 #X connect 1 0 5 0;
@@ -21,9 +34,18 @@
 #X connect 2 0 1 2;
 #X connect 6 0 0 1;
 #X connect 6 1 0 2;
+#X connect 6 2 13 0;
+#X connect 6 3 14 0;
 #X connect 6 5 9 0;
 #X connect 6 6 9 1;
 #X connect 8 0 10 0;
 #X connect 9 0 8 0;
-#X connect 11 0 0 0;
-#X connect 12 0 6 0;
+#X connect 11 0 17 0;
+#X connect 12 0 0 0;
+#X connect 13 0 12 1;
+#X connect 14 0 12 2;
+#X connect 15 0 12 3;
+#X connect 16 0 12 4;
+#X connect 17 0 12 0;
+#X connect 18 0 17 2;
+#X connect 19 0 17 1;

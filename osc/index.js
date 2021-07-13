@@ -67,20 +67,29 @@ const formulas = {
 }
 
 let i = 0;
-const traj = circle(190, 150, 200, 200);
+let j = 0;
+const traj = circle(190, 80, 200, 200);
 setInterval(() => {
     const data = [
         ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].amp], ["/ang", traj[i].angle]
     ]
-    // const data = [["/amp", Math.random()], ["/pan", Math.sin(i)], ["/note", Math.random()* 2000 + 10]];
-    console.log(data[3]);
+    // const data = [["/
+    if (j === 0) {
+        data.push(["/on"])
+    }
+    j++;
+    if (j === 3) {
+        data.push(["/off"])
+        j = 0;
+    }
+    //console.log(data);
     // a bundle without an explicit time tag
     const bundle = new Bundle(...data);
     client.send(bundle);
     
     i = (i+1)% (traj.length);
     // console.log("i ", i)
-}, 200)
+}, 250)
 
 
 
