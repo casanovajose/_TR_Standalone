@@ -1,17 +1,20 @@
 const { Bundle, Client } = require("node-osc");
-const client = new Client("127.0.0.1", 3333);
-
 
 const config = {
-    resolution: 1000,
-    mode: "S",
-    osc: {
-        port: 6666,
-        host: "127.0.0.1"
-    }
+  resolution: 1000,
+  mode: "S",
+  osc: {
+    port: 666,
+    host: "127.0.0.1"
+  }
 }
-
+const client = new Client("127.0.0.1", config.osc.port || 666);
 const trajectories = {}
+
+// math
+function calcAngleDegrees(x, y) {
+return Math.atan2(y, x) * 180 / Math.PI;
+}
 
 //const createTrajectory
 
@@ -33,7 +36,7 @@ function circle (radius, steps, centerX, centerY){
         point.x = Math.round((centerX + radius * Math.cos(2 * Math.PI * i / steps)));
         point.y = Math.round((centerY + radius * Math.sin(2 * Math.PI * i / steps)));
         // pan
-        point.angle =  Math.atan2(point.y, point.x) * (180 / Math.PI); // in radians
+        point.angle =  Math.abs(Math.atan2(point.y - radius, point.x - radius) * (180 / Math.PI)); // in radians
         //point.r = point.x /  (2*radius);
         //point.l = 1 - point.x / (2*radius)
         // dist
@@ -64,20 +67,20 @@ const formulas = {
 }
 
 let i = 0;
-const traj = circle(190, 100, 200, 200);
+const traj = circle(190, 50, 200, 200);
 setInterval(() => {
     const data = [
         ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].amp], ["/ang", traj[i].angle]
     ]
     // const data = [["/amp", Math.random()], ["/pan", Math.sin(i)], ["/note", Math.random()* 2000 + 10]];
-    console.log(data);
+    console.log(data[3]);
     // a bundle without an explicit time tag
     const bundle = new Bundle(...data);
     client.send(bundle);
     
     i = (i+1)% (traj.length);
-    console.log("i ", i)
-}, 100)
+    // console.log("i ", i)
+}, 200)
 
 
 
