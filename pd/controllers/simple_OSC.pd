@@ -1,5 +1,5 @@
-#N canvas -267 646 1266 561 12;
-#X obj 220 70 import mrpeach;
+#N canvas 181 745 1266 561 12;
+#X obj 90 50 import mrpeach;
 #X obj 220 115 udpreceive 6666;
 #X obj 220 150 unpackOSC;
 #X obj 240 240 outlet;
@@ -11,12 +11,16 @@
 #X obj 500 240 outlet;
 #X obj 560 240 outlet;
 #X text 160 280 angle / distance /on / off /speed /x /y;
+#X floatatom 140 420 5 0 0 0 - - -, f 5;
+#X obj 354 43 inlet;
 #X connect 1 0 2 0;
 #X connect 2 0 8 0;
 #X connect 8 0 4 0;
+#X connect 8 0 12 0;
 #X connect 8 1 3 0;
 #X connect 8 2 5 0;
 #X connect 8 3 6 0;
 #X connect 8 4 7 0;
-#X connect 8 6 9 0;
-#X connect 8 7 10 0;
+#X connect 8 5 9 0;
+#X connect 8 6 10 0;
+#X connect 13 0 1 0;

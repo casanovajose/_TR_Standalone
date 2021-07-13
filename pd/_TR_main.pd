@@ -1,4 +1,4 @@
-#N canvas 442 587 1208 665 10;
+#N canvas 828 670 1208 665 10;
 #X obj 160 160 spaces/stereo_lr~;
 #X obj 180 230 mixers/stereo_lr_rev~;
 #X obj 303 182 r main_amp;
@@ -6,10 +6,12 @@
 #X obj 303 281 s visual_vu_R;
 #X obj 191 300 dac~;
 #X obj 220 50 controllers/simple_OSC;
-#X text 220 20 angle / distance /on / off /speed /x /y;
-#X msg 458 136 goto \$1 \$2;
+#X text 380 50 angle / distance /on / off /speed /x /y;
+#X msg 460 140 goto \$1 \$2;
 #X obj 458 113 pack f f;
-#X obj 458 160 s grid;
+#X obj 460 164 s grid;
+#X obj 100 100 noise~;
+#X msg 120 20 port 3333;
 #X connect 0 0 1 0;
 #X connect 0 1 1 1;
 #X connect 1 0 5 0;
@@ -23,3 +25,5 @@
 #X connect 6 6 9 1;
 #X connect 8 0 10 0;
 #X connect 9 0 8 0;
+#X connect 11 0 0 0;
+#X connect 12 0 6 0;
