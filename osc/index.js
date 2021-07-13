@@ -67,7 +67,7 @@ const formulas = {
 }
 
 let i = 0;
-const traj = circle(190, 50, 200, 200);
+const traj = circle(190, 150, 200, 200);
 setInterval(() => {
     const data = [
         ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].amp], ["/ang", traj[i].angle]
