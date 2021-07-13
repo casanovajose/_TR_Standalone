@@ -1,4 +1,4 @@
-#N canvas 828 670 1208 665 10;
+#N canvas 328 198 1209 667 10;
 #X obj 160 160 spaces/stereo_lr~;
 #X obj 180 230 mixers/stereo_lr_rev~;
 #X obj 303 182 r main_amp;

@@ -1,4 +1,4 @@
-#N canvas 332 560 1202 633 10;
+#N canvas 72 85 1202 635 10;
 #X obj 200 60 r grid;
 #X obj 499 39 cnv 15 449 319 empty empty Funciones 20 12 0 14 #e0e0e0
 #404040 0;
@@ -173,17 +173,17 @@
 #X obj 660 380 vu 10 120 visual_vu_L left\ ch -4 -8 0 5 #404040 #000000
 1 0;
 #X obj 332 586 hsl 128 10 0 180 0 0 empty ang ángulo -2 -8 0 10 #fcfcfc
-#000000 #000000 4632 1;
+#000000 #000000 6940 1;
 #X obj 100 480 hsl 128 15 0 1 0 0 input_amp empty input\ amp -2 -8
-0 10 #c4fcfc #000000 #000000 7200 1;
+0 10 #c4fcfc #000000 #000000 8100 1;
 #X msg 9 288 \; pd dsp 1;
 #X msg 10 351 \; pd dsp 0;
 #X obj 8 251 loadbang;
 #X obj 8 170 _TR_main;
 #X obj 390 480 vsl 10 100 0 500 0 0 empty dist empty 0 -9 0 10 #fcfcfc
-#000000 #000000 0 1;
-#X obj 100 40 grid grid 400 0 400 400 0 400 0 1 1 10 10 276 430;
-#X obj 600 379 vsl 15 120 0 127 0 0 main_amp empty empty 0 -9 0 10
-#fcfcfc #000000 #000000 0 1;
+#000000 #000000 7267 1;
+#X obj 100 40 grid grid 400 0 400 400 0 400 0 1 1 10 10 264 59;
+#X obj 600 379 vsl 15 120 0 0.9 0 0 main_amp empty empty 0 -9 0 10
+#fcfcfc #000000 #000000 2350 1;
 #X connect 0 0 15 0;
 #X connect 12 0 10 0;
