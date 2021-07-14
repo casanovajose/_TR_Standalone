@@ -68,7 +68,7 @@ const formulas = {
 
 let i = 0;
 let j = 0;
-const traj = circle(190, 80, 200, 200);
+const traj = circle(190, 300, 200, 200);
 setInterval(() => {
     const data = [
         ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].amp], ["/ang", traj[i].angle]
@@ -77,19 +77,24 @@ setInterval(() => {
     if (j === 0) {
         data.push(["/on"])
     }
+    
+    if (j === 2) {
+        data.push(["/off"]);
+    }
     j++;
-    if (j === 3) {
-        data.push(["/off"])
+    if(j === 20) {
         j = 0;
     }
-    //console.log(data);
+    
+
+    // console.log(j);
     // a bundle without an explicit time tag
     const bundle = new Bundle(...data);
     client.send(bundle);
     
     i = (i+1)% (traj.length);
     // console.log("i ", i)
-}, 250)
+}, 20)
 
 
 
