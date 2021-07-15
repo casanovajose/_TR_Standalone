@@ -13,30 +13,32 @@
 #X text 29 333 Phase;
 #X text 30 404 waveform;
 #X obj 30 106 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 602 256 0;
+#fcfcfc #000000 #000000 886 256 0;
 #X text 100 104 Carrier (Hz);
 #X text 100 140 Modulation (Hz);
 #X obj 30 141 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 602 256 0;
+#fcfcfc #000000 #000000 2658 256 0;
 #X obj 250 123 vsl 10 60 0 1 0 0 empty empty amp -4 70 0 10 #fcfcfc
-#000000 #000000 5900 1;
+#000000 #000000 3400 1;
 #X text 100 180 ModIndex (/100);
 #X obj 30 181 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 0.13 256 0;
+#fcfcfc #000000 #000000 2 256 0;
 #X obj 230 415 line~;
 #X obj 230 390 pack 0 50;
 #X obj 123 437 *~;
 #X text 59 17 FM Phase modulation;
-#X obj 123 480 outlet~;
+#X obj 120 500 outlet~;
 #X obj 310 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 1 1;
 #X obj 520 270 spigot;
 #X obj 520 340 *;
 #X obj 360 130 hradio 15 1 0 8 empty empty empty 0 -8 0 10 #fcfcfc
-#000000 #000000 1;
+#000000 #000000 3;
 #X floatatom 520 390 5 0 0 0 - - -, f 5;
 #X obj 470 290 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
+#X obj 40 50 inlet;
+#X obj 120 470 lop~ 15000;
 #X connect 0 0 6 0;
 #X connect 1 0 5 0;
 #X connect 2 0 5 1;
@@ -52,7 +54,7 @@
 #X connect 19 0 4 0;
 #X connect 20 0 22 1;
 #X connect 21 0 20 0;
-#X connect 22 0 24 0;
+#X connect 22 0 32 0;
 #X connect 25 0 26 1;
 #X connect 26 0 27 0;
 #X connect 27 0 16 0;
@@ -60,4 +62,6 @@
 #X connect 28 0 27 1;
 #X connect 28 0 30 0;
 #X connect 30 0 27 0;
+#X connect 31 0 13 0;
+#X connect 32 0 24 0;
 #X coords 0 -1 1 1 501 130 1 22 89;
