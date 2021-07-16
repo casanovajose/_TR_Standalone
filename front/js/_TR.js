@@ -1,8 +1,68 @@
 
 
-const getPaths = (canvas) => {
+function renderSVGs(id, xml_string){
+  var doc = new DOMParser().parseFromString(`<svg class="paths" xmlns="http://www.w3.org/2000/svg" width="400" height="400">${xml_string}</svg>`, 'application/xml');
+  var el = document.getElementById(id)
+  el.appendChild(
+    el.ownerDocument.importNode(doc.documentElement, true)
+  )
+}
+
+function removeAuxXml(id) {
+  var el = document.getElementById(id)
+  el.innerHTML = "";
+}
+
+function getPathPoints(path) {
+  points = [];
+  // TODO apply transformation
+  path.forEach((point) => {
+	  points.push(point.join(" "))
+  });
+  return points.join(",")
+}
+
+function calculatePathsPoints(className, resolution) {
+  const svgs = document.getElementsByClassName(className);
+  console.log("PATHS ", svgs);
+  const paths = [];
   
-};
+  Array.from(svgs).forEach((svg) => {
+    const path = svg.getElementsByTagName("path")[0];
+    const pathLength = Math.floor(path.getTotalLength());
+    const res = pathLength / resolution;
+    const pointsPath = [];
+    for (let i = 0; i <= resolution; i++) {
+      const pt = path.getPointAtLength(i*res);
+      pt.x = Math.round(pt.x);
+      pt.y = Math.round(pt.y);
+      pointsPath.push({x: pt.x, y: pt.y});
+    }
+    // console.log("res ", res);
+    // console.log("PATHS res ", pointsPath);
+    paths.push(pointsPath);
+  });
+
+  return paths;
+}
+
+function drawPathPoints(canvas, points) {
+  points.forEach(function(point, index) {
+    const circle = new fabric.Circle({
+      radius: 2,
+      fill: 'none',
+      left: point.x,
+      top: point.y,
+      originX: 'center',
+      originY: 'center',
+      hasBorders: true,
+      hasControls: false,
+      name: index
+    });
+    canvas.add(circle);
+  });
+}
+
 
 (function() {
   const $ = function(id){return document.getElementById(id)};
@@ -10,41 +70,66 @@ const getPaths = (canvas) => {
   const canvas = this.__canvas = new fabric.Canvas('c', {
     isDrawingMode: true,
     width: 400,
-    height: 400
+    height: 400,
+    skipOffScreen: true
   });
 
   fabric.Object.prototype.transparentCorners = false;
   // buttons
-  const drawingModeEl = $('drawing-mode'),
-    drawingOptionsEl = $('drawing-mode-options'),
-    drawingColorEl = $('drawing-color'),
+  const compileEl = $('compile'),
+    //drawingOptionsEl = $('drawing-mode-options'),
+    //drawingColorEl = $('drawing-color'),
     clearEl = $('clear-canvas')
     saveEl = $('save-paths');
-  
+    resolutionEl = $('resolution');
+    onMessageEl = $("on_message"); 
+    offMessageEl = $("off_message");
+
   // clear the canvas
   clearEl.onclick = function() { 
     canvas.clear() 
   };
   
   // save the path
-  saveEl.onclick = function() {
-    canvas.renderAll();
+  compileEl.onclick = function() {
+    // refresh resolution points
+    canvas.remove(...canvas.getObjects("circle"));
+
     const objects = canvas.getObjects("path");
-    console.log("paths",  objects);
+    // add paths svgs to limbo
+    objects.forEach((svg) => {
+      renderSVGs("limbo", svg.toSVG());
+    });
+    
+    // get the resolution points
+    const pointsArray = calculatePathsPoints("paths", resolutionEl.value);
+    console.log(pointsArray);
+    // draw resolution points
+    pointsArray.forEach((points) => {
+      drawPathPoints(canvas, points);
+    });
+    
+    // clean limbo
+    removeAuxXml("limbo");
+    // renderPathsPoints(canvas, className);
+    // object.on("modified", function(a) { 
+    // });
+    
+    // console.log("paths",  getPathPoints(object.path));
   };
 
   // activate drawing mode
-  drawingModeEl.onclick = function() {
-    canvas.isDrawingMode = !canvas.isDrawingMode;
-    if (canvas.isDrawingMode) {
-      drawingModeEl.innerHTML = 'Enter edit mode';
-      //drawingOptionsEl.style.display = '';
-    }
-    else {
-      drawingModeEl.innerHTML = 'Enter drawing mode';
-      //drawingOptionsEl.style.display = 'none';
-    }
-  };
+  // drawingModeEl.onclick = function() {
+  //   canvas.isDrawingMode = !canvas.isDrawingMode;
+  //   if (canvas.isDrawingMode) {
+  //     drawingModeEl.innerHTML = 'Enter edit mode';
+  //     //drawingOptionsEl.style.display = '';
+  //   }
+  //   else {
+  //     drawingModeEl.innerHTML = 'Enter drawing mode';
+  //     //drawingOptionsEl.style.display = 'none';
+  //   }
+  // };
 
 //   if (fabric.PatternBrush) {
 //     var vLinePatternBrush = new fabric.PatternBrush(canvas);
