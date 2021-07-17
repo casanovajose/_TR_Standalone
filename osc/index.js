@@ -1,13 +1,28 @@
 const { Bundle, Client } = require("node-osc");
+const express = require('express');
+const cors = require('cors')
+const app = express()
+app.use(cors());
 
 const config = {
   resolution: 1000,
   mode: "S",
+  port: 8666,
   osc: {
     port: 666,
     host: "127.0.0.1"
   }
 }
+
+app.post('/traj', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(config.port, () => {
+  console.log(`_TR listening at http://localhost:${config.port}`)
+})
+
+
 const client = new Client("127.0.0.1", config.osc.port || 666);
 const trajectories = {}
 
