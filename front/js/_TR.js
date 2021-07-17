@@ -24,7 +24,6 @@ function getPathPoints(path) {
 
 function calculatePathsPoints(className, resolution) {
   const svgs = document.getElementsByClassName(className);
-  console.log("PATHS ", svgs);
   const paths = [];
   
   Array.from(svgs).forEach((svg) => {
@@ -66,6 +65,8 @@ function drawPathPoints(canvas, points) {
 
 (function() {
   const $ = function(id){return document.getElementById(id)};
+  let currentPoints = [];
+  let currentSVGs = [];
 
   const canvas = this.__canvas = new fabric.Canvas('c', {
     isDrawingMode: true,
@@ -80,10 +81,12 @@ function drawPathPoints(canvas, points) {
     //drawingOptionsEl = $('drawing-mode-options'),
     //drawingColorEl = $('drawing-color'),
     clearEl = $('clear-canvas')
-    saveEl = $('save-paths');
+    saveEl = $('traj_save');
     resolutionEl = $('resolution');
     onMessageEl = $("on_message"); 
     offMessageEl = $("off_message");
+    srcEl = $("traj_src");
+    titleEl = $("traj_title");
 
   // clear the canvas
   clearEl.onclick = function() { 
@@ -93,17 +96,22 @@ function drawPathPoints(canvas, points) {
   // save the path
   compileEl.onclick = function() {
     // refresh resolution points
+    currentSVGs = [];
+    currentPoints = [];
     canvas.remove(...canvas.getObjects("circle"));
 
     const objects = canvas.getObjects("path");
-    // add paths svgs to limbo
+    // add paths svgs to limboc
+    let svgString = "";
     objects.forEach((svg) => {
-      renderSVGs("limbo", svg.toSVG());
+      svgString= svg.toSVG();
+      renderSVGs("limbo", svgString);
+      currentSVGs.push(svgString);
     });
     
     // get the resolution points
     const pointsArray = calculatePathsPoints("paths", resolutionEl.value);
-    console.log(pointsArray);
+    currentPoints = pointsArray;
     // draw resolution points
     pointsArray.forEach((points) => {
       drawPathPoints(canvas, points);
@@ -111,12 +119,28 @@ function drawPathPoints(canvas, points) {
     
     // clean limbo
     removeAuxXml("limbo");
-    // renderPathsPoints(canvas, className);
     // object.on("modified", function(a) { 
     // });
     
     // console.log("paths",  getPathPoints(object.path));
   };
+
+  saveEl.onclick = function() {
+    axios.post('http://localhost:8666/traj', {
+      onMessage: onMessageEl.checked || false,
+      offMessage: offMessageEl.checked || false,
+      source: srcEl.value,
+      title: titleEl.value,
+      svg: currentSVGs,
+      points: currentPoints
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   // activate drawing mode
   // drawingModeEl.onclick = function() {

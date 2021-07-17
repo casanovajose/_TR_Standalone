@@ -1,7 +1,9 @@
 const { Bundle, Client } = require("node-osc");
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
+
 const app = express()
+app.use(express.json());
 app.use(cors());
 
 const config = {
@@ -14,14 +16,16 @@ const config = {
   }
 }
 
+let traj = [];
+
 app.post('/traj', (req, res) => {
-  res.send('Hello World!')
+  traj = calculateTraj(req.body.points[0]);
+  res.send('');
 })
 
 app.listen(config.port, () => {
   console.log(`_TR listening at http://localhost:${config.port}`)
 })
-
 
 const client = new Client("127.0.0.1", config.osc.port || 666);
 const trajectories = {}
@@ -64,52 +68,59 @@ function circle (radius, steps, centerX, centerY){
 }
 
 // console.log();
- 
-const formulas = {
-    circle({name, x, y, r}) {
-        // (x−h)2+(y−k)2=r2
-        const traj = []
+function calculateTraj(points, on = false, off = false) {
+  return points.map((p) => {
 
-
-
-    },
-    noisePoints() {
-
-    },
-    gaussianRandomPoints() {
-
+    const point = {
+      x: p.x,
+      y: p.y,
+      spd: 1,
+      angle: Math.abs(Math.atan2(p.y - 200, p.x - 200) * (180 / Math.PI)),
+      dist: 400 - p.y
     }
+    if (on) {
+      point.on = on;
+    }
+    if (off) {
+      point.off = off;
+    }
+
+    return point;
+  });
+
 }
 
 let i = 0;
 let j = 0;
-const traj = circle(190, 300, 200, 200);
+//const traj = circle(190, 300, 200, 200);
+
+let del = 50;
 setInterval(() => {
+  if (traj.length > 0) {
     const data = [
-        ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].amp], ["/ang", traj[i].angle]
+      ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].dist], ["/ang", traj[i].angle]
     ]
     // const data = [["/
-    if (j === 0) {
+    if (traj[i].on) {
         data.push(["/on"])
     }
     
-    if (j === 2) {
+    if (traj[i].on) {
         data.push(["/off"]);
     }
-    j++;
-    if(j === 20) {
-        j = 0;
-    }
-    
+       
 
     // console.log(j);
     // a bundle without an explicit time tag
     const bundle = new Bundle(...data);
     client.send(bundle);
+    console.log(data)
     
     i = (i+1)% (traj.length);
-    // console.log("i ", i)
-}, 20)
+  // console.log("i ", i)
+  }
+    
+}, del)
 
 
 

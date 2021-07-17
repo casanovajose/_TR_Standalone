@@ -1,4 +1,4 @@
-#N canvas 400 97 998 646 10;
+#N canvas 1955 -11 998 647 10;
 #X obj 100 250 spaces/stereo_lr~;
 #X obj 120 320 mixers/stereo_lr_rev~;
 #X obj 243 272 r main_amp;
@@ -13,14 +13,14 @@
 #X obj 10 100 noise~;
 #X obj 40 70 bp~ 50 0;
 #X obj 90 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 2.54 256 0;
+#fcfcfc #000000 #000000 1.43 256 0;
 #X obj 30 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 717.109 256 0;
+#fcfcfc #000000 #000000 544 256 0;
 #X obj 100 170 processors/atack_decay~;
 #X obj 520 250 generators/fm_phase~;
 #X obj 643 181 metro 100;
 #X obj 670 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
+#000000 0 1;
 #X floatatom 740 200 5 0 0 0 - - -, f 5;
 #X obj 650 210 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
@@ -46,7 +46,7 @@
 #X connect 8 0 10 0;
 #X connect 9 0 8 0;
 #X connect 11 0 12 0;
-#X connect 12 0 15 0;
+#X connect 12 0 0 0;
 #X connect 13 0 12 2;
 #X connect 14 0 12 1;
 #X connect 15 0 0 0;

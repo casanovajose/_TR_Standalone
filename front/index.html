@@ -13,6 +13,14 @@
     <canvas id="c"></canvas>
     <div>
       <div>
+        <label for="traj_title">title</label>
+        <input id="traj_title" type="text" name="traj_title"> 
+      </div>
+      <div>
+        <label for="traj_src">source</label>
+        <input id="traj_src" type="text" name="traj_src"> 
+      </div>
+      <div>
         <label for="on_message">/on message for path</label>
         <input id="on_message" type="checkbox" name="on_message"> 
       </div>
@@ -22,16 +30,17 @@
       </div>
       <div>
         <label for="resolution">resolution</label>
-        <input id="resolution" type="range" name="resolution" min="1" max="100" step="1"> 
+        <input id="resolution" type="range" name="resolution" min="2" max="100" step="1"> 
       </div>
       <button id="compile">Compile</button>
       <button id="clear-canvas">Clear</button>
-      <button id="save-paths">Save</button>
+      <button id="traj_save">Save</button>
     </div>
     <div id="limbo"></div>
   </div>
   
   <script src="js/fabric.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="js/_TR.js"></script>
 </body>
 </html>
