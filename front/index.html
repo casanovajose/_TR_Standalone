@@ -16,33 +16,39 @@
     
     <div id="window1" class="window">
       <h2  class="window-header" id="window1-header">Untitled
-        <button class="close-window">X</button> 
-        <button class="minimize-window">-</button></h2>
+        <button class="close-window">-</button> 
+        <button class="minimize-window">x</button></h2>
       <canvas id="canvas1"></canvas>
       <canvas class="speed-canvas" id="speed1"></canvas>
-      <div>
+      <div class="form-input">
         <label for="traj_title">title</label>
         <input id="traj_title" type="text" name="traj_title"> 
       </div>
-      <div>
+      <div class="form-input">
         <label for="traj_src">source</label>
         <input id="traj_src" type="text" name="traj_src"> 
       </div>
-      <div>
-        <label for="on_message">/on message for path</label>
+      <div class="form-input">
+        <label for="on_message">/on msg for path</label>
         <input id="on_message" type="checkbox" name="on_message"> 
       </div>
-      <div>
-        <label for="off_message">/off message for path</label>
+      <div class="form-input">
+        <label for="off_message">/off msg for path</label>
         <input id="off_message" type="checkbox" name="off_message"> 
       </div>
-      <div>
+      <div class="form-input">
         <label for="resolution">resolution</label>
         <input id="resolution" type="range" name="resolution" min="2" max="100" step="1"> 
       </div>
-      <button id="compile">Compile</button>
-      <button id="clear-canvas">Clear</button>
-      <button id="traj_save">Save</button>
+      <div class="form-input">
+        <label for="resolution">tempo</label>
+        <input id="tempo" type="range" name="tempo" min="0.1" max="10" step="0.1"> 
+      </div>
+      <div class="form-button">
+        <button id="compile">Compile</button>
+        <button id="clear-canvas">Clear</button>
+        <button id="traj_save">Save</button>
+      </div>      
     </div>
     <div id="limbo"></div>
   </div>
