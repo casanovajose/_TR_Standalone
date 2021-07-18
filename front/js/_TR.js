@@ -1,3 +1,7 @@
+// selectors
+const $ = function(id){return document.getElementById(id)};
+const $c = function(c){return Array.from(document.getElementsByClassName(c))};
+
 // DRAG & MOVE WINDOWS
 
 // Make the DIV element draggable:
@@ -45,17 +49,16 @@ function dragElement(elmnt) {
 }
 
 // UTILS
-
 function renderSVGs(id, xml_string){
   var doc = new DOMParser().parseFromString(`<svg class="paths" xmlns="http://www.w3.org/2000/svg" width="400" height="400">${xml_string}</svg>`, 'application/xml');
-  var el = document.getElementById(id)
+  var el =$(id)
   el.appendChild(
     el.ownerDocument.importNode(doc.documentElement, true)
   )
 }
 
 function removeAuxXml(id) {
-  var el = document.getElementById(id)
+  var el =$(id)
   el.innerHTML = "";
 }
 
@@ -69,7 +72,7 @@ function getPathPoints(path) {
 }
 
 function calculatePathsPoints(className, resolution) {
-  const svgs = document.getElementsByClassName(className);
+  const svgs = $c(className);
   const paths = [];
   
   Array.from(svgs).forEach((svg) => {
@@ -107,20 +110,65 @@ function drawPathPoints(canvas, points) {
     canvas.add(circle);
   });
 }
+// for speed control
+function drawControlPoints(canvas) {
+  for (let i = 0; i < 100; i++) {
+    const circle = new fabric.Circle({
+      radius: 2,
+      fill: 'none',
+      left: i*8,
+      top: 100,
+      originX: 'center',
+      originY: 'center',
+      hasBorders: true,
+      hasControls: false,
+      name: i,
+      selectable: false
+    });
+    canvas.add(circle);
+  }
+}
 
 // THE CANVASes CODE
 (function() {
-  const $ = function(id){return document.getElementById(id)};
   let currentPoints = [];
+  let flattenPoints = [];
   let currentSVGs = [];
 
-  const canvas = this.__canvas = new fabric.Canvas('c', {
+  const canvas = this.__canvas = new fabric.Canvas('canvas1', {
     isDrawingMode: true,
     width: 400,
     height: 400,
     skipOffScreen: true
   });
 
+  const canvasSpeed = this.__canvas = new fabric.Canvas('speed1', {
+    isDrawingMode: false,
+    width: 400,
+    height: 200,
+    hoverCursor: "crosshair",
+    defaultCursor: "crosshair",
+    selection: false
+  });
+  let pressed = false;
+  canvasSpeed.on("mouse:down", (e) => {pressed = true;});
+
+  canvasSpeed.on("mouse:up", (e) => {pressed = false;});
+
+  canvasSpeed.on("mouse:move", function (e) {
+    //console.log("ppp ",pressed);
+    if (pressed && e.pointer.x >= 0 && e.pointer.x <= 400) {
+      console.log(e);
+      this.item(Math.floor(e.pointer.x/8)).top = e.pointer.y;
+      //console.log("change x", e.pointer.x );
+      this.renderAll();
+    }
+  });
+  // speed control points
+  drawControlPoints(canvasSpeed);
+
+
+  console.log(canvasSpeed);
   fabric.Object.prototype.transparentCorners = false;
   // buttons
   const compileEl = $('compile'),
@@ -162,7 +210,8 @@ function drawPathPoints(canvas, points) {
     pointsArray.forEach((points) => {
       drawPathPoints(canvas, points);
     });
-    
+
+   
     // clean limbo
     removeAuxXml("limbo");
     // object.on("modified", function(a) { 
