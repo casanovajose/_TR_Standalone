@@ -10,6 +10,7 @@ const config = {
   resolution: 1000,
   mode: "S",
   port: 8666,
+  host: "127.0.0.1",
   osc: {
     port: 666,
     host: "127.0.0.1"
@@ -17,14 +18,16 @@ const config = {
 }
 
 let traj = [];
+let tempo = 1000; // in ms
 
 app.post('/traj', (req, res) => {
   traj = calculateTraj(req.body.points[0]);
+  tempo = req.body.tempo*1000; // compute interval in ms
   res.send('');
 })
 
 app.listen(config.port, () => {
-  console.log(`_TR listening at http://localhost:${config.port}`)
+  console.log(`_TR waiting for orders at ${config.host}:${config.port}`)
 })
 
 const client = new Client("127.0.0.1", config.osc.port || 666);
@@ -75,7 +78,7 @@ function calculateTraj(points, on = false, off = false) {
       x: p.x,
       y: p.y,
       spd: 1,
-      angle: Math.abs(Math.atan2(p.y - 200, p.x - 200) * (180 / Math.PI)),
+      angle: Math.abs(Math.atan2(p.y - 400, p.x - 200) * (180 / Math.PI)),
       dist: 400 - p.y
     }
     if (on) {
@@ -95,7 +98,7 @@ let j = 0;
 //const traj = circle(190, 300, 200, 200);
 
 let del = 50;
-setInterval(() => {
+function readTraj() {
   if (traj.length > 0) {
     const data = [
       ["/x", traj[i].x], ["/y", traj[i].y], ["/dist", traj[i].dist], ["/ang", traj[i].angle]
@@ -119,8 +122,11 @@ setInterval(() => {
     i = (i+1)% (traj.length);
   // console.log("i ", i)
   }
-    
-}, del)
+  console.log("tempo ", tempo);  
+  setTimeout(readTraj, tempo);
+}
+readTraj()
+
 
 
 
