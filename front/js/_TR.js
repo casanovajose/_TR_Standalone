@@ -1,12 +1,9 @@
 // selectors
 const $ = function(id){return document.getElementById(id)};
 const $c = function(c){return Array.from(document.getElementsByClassName(c))};
-
+let foc = "window1";
+$(foc).classList.add("focus");;
 // DRAG & MOVE WINDOWS
-
-// Make the DIV element draggable:
-dragElement(document.getElementById("window1"));
-
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "-header")) {
@@ -47,6 +44,18 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+// Make the DIV element draggable:
+$c("window").forEach((e) => {
+  dragElement(e);
+  // focused window
+  e.addEventListener("click", () => {    
+    $(foc).classList.remove("focus");
+    e.classList.add("focus");
+    foc = e.id;
+  });
+});
+
+
 
 // UTILS
 function renderSVGs(id, xml_string){
@@ -157,8 +166,8 @@ function drawControlPoints(canvas) {
 
   canvasSpeed.on("mouse:move", function (e) {
     //console.log("ppp ",pressed);
-    if (pressed && e.pointer.x >= 0 && e.pointer.x <= 400) {
-      console.log(e);
+    if (pressed && e.pointer.x >= 0 && e.pointer.x <= 401) {
+      // improve movement      
       this.item(Math.floor(e.pointer.x/8)).top = e.pointer.y;
       //console.log("change x", e.pointer.x );
       this.renderAll();
@@ -168,7 +177,7 @@ function drawControlPoints(canvas) {
   drawControlPoints(canvasSpeed);
 
 
-  console.log(canvasSpeed);
+  // console.log(canvasSpeed);
   fabric.Object.prototype.transparentCorners = false;
   // buttons
   const compileEl = $('compile'),
@@ -181,6 +190,7 @@ function drawControlPoints(canvas) {
     offMessageEl = $("off_message");
     srcEl = $("traj_src");
     titleEl = $("traj_title");
+    tempoEl = $("tempo")
 
   // clear the canvas
   clearEl.onclick = function() { 
@@ -210,14 +220,9 @@ function drawControlPoints(canvas) {
     pointsArray.forEach((points) => {
       drawPathPoints(canvas, points);
     });
-
    
     // clean limbo
     removeAuxXml("limbo");
-    // object.on("modified", function(a) { 
-    // });
-    
-    // console.log("paths",  getPathPoints(object.path));
   };
 
   saveEl.onclick = function() {
@@ -227,7 +232,8 @@ function drawControlPoints(canvas) {
       source: srcEl.value,
       title: titleEl.value,
       svg: currentSVGs,
-      points: currentPoints
+      points: currentPoints,
+      tempo: tempoEl.value
     })
     .then(function (response) {
       console.log(response);

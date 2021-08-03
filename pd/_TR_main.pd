@@ -1,4 +1,4 @@
-#N canvas 1955 -11 998 647 10;
+#N canvas 124 56 998 648 10;
 #X obj 100 250 spaces/stereo_lr~;
 #X obj 120 320 mixers/stereo_lr_rev~;
 #X obj 243 272 r main_amp;
@@ -13,11 +13,11 @@
 #X obj 10 100 noise~;
 #X obj 40 70 bp~ 50 0;
 #X obj 90 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 1.43 256 0;
+#fcfcfc #000000 #000000 122.94 256 0;
 #X obj 30 20 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 544 256 0;
+#fcfcfc #000000 #000000 3786 256 0;
 #X obj 100 170 processors/atack_decay~;
-#X obj 520 250 generators/fm_phase~;
+#X obj 520 260 generators/fm_phase~;
 #X obj 643 181 metro 100;
 #X obj 670 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000 0 1;
@@ -29,11 +29,24 @@
 #X obj 830 210 line 0 50;
 #X obj 770 120 + 60;
 #X msg 830 170 \$1 500;
-#X obj 770 90 random 1000;
+#X obj 410 230 metro 100;
+#X obj 770 90 random 4000;
+#X obj 440 269 delay 10;
+#X obj 100 500 writesf~ 2;
+#X msg 236 505 open fm_noise.wav;
+#X msg 240 460 start;
+#X msg 250 560 stop;
+#X obj 140 -190 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 80 110 *~;
+#X obj 190 -40 pack 0 20;
+#X obj 190 -10 line~;
 #X connect 0 0 1 0;
 #X connect 0 1 1 1;
 #X connect 1 0 5 0;
+#X connect 1 0 29 0;
 #X connect 1 1 5 1;
+#X connect 1 1 29 1;
 #X connect 1 2 3 0;
 #X connect 1 3 4 0;
 #X connect 2 0 1 2;
@@ -46,19 +59,30 @@
 #X connect 8 0 10 0;
 #X connect 9 0 8 0;
 #X connect 11 0 12 0;
-#X connect 12 0 0 0;
+#X connect 12 0 34 0;
 #X connect 13 0 12 2;
 #X connect 14 0 12 1;
 #X connect 15 0 0 0;
 #X connect 16 0 15 0;
 #X connect 17 0 20 0;
 #X connect 18 0 17 0;
+#X connect 18 0 26 0;
 #X connect 19 0 17 1;
-#X connect 20 0 26 0;
+#X connect 20 0 27 0;
 #X connect 22 0 23 2;
 #X connect 23 0 16 0;
 #X connect 23 0 21 0;
 #X connect 23 0 14 0;
 #X connect 24 0 25 0;
 #X connect 25 0 23 0;
-#X connect 26 0 24 0;
+#X connect 26 0 15 1;
+#X connect 26 0 28 0;
+#X connect 27 0 24 0;
+#X connect 28 0 15 2;
+#X connect 30 0 29 0;
+#X connect 31 0 29 0;
+#X connect 32 0 29 0;
+#X connect 33 0 35 0;
+#X connect 34 0 15 0;
+#X connect 35 0 36 0;
+#X connect 36 0 34 1;
