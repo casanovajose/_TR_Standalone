@@ -1,0 +1,52 @@
+import oscP5.*;
+
+class Point {
+  int x;
+  int y;
+  int px;
+  int py;
+  int ox;
+  int oy;
+  int vel;
+  int p;
+  double a;
+  int dist;
+  String cmd;
+  
+  Point(int x, int y, int px, int py, int offsetX, int offsetY) {
+    this.x = x;
+    this.y = y;
+    this.ox = offsetX;
+    this.oy = offsetY;
+    this.px = px;
+    this.py = py;
+    this.cmd = "_";
+    this.calcVel();    
+    this.calcAngDist();
+  }
+  
+  String toString() {
+    return x+","+y+","+a+","+dist+","+vel+","+cmd ;
+  }
+  
+  void calcVel () {
+    float velX = abs(x-px);
+    float velY = abs(y-py);
+    this.vel = int((velX + velY) / 2);
+  }
+  
+  /**
+  * Converts cartesian to polar
+  */
+  void calcAngDist () {
+    this.a = abs( (float)Math.toDegrees(Math.atan2(y-oy, x-ox)));
+    this.dist = (int) Math.sqrt(ox*ox + oy*oy);
+  }
+  
+  /**
+  * cmd is intended for Trajectory level in order to add messages like ON / OFF in OSC Bundles
+  */
+  void setCmd(String msg) {
+    this.cmd = msg;
+  }
+}
