@@ -1,10 +1,10 @@
-
-
+import oscP5.*;
 
 class Canvas {
   PVector location;
   PVector size;
   ArrayList <Point> points;
+  ArrayList<OscBundle> traj = new ArrayList<OscBundle>();
   PGraphics cnv;
   Tablet tablet;
   int x, y;
@@ -127,5 +127,11 @@ class Canvas {
     points.removeAll(points);
     m = 1;
     cnv.background(0, 0, 100);
+  }
+  
+  void loadTrajBundles() {
+    for(int i = 0; i < points.size(); i++) {
+      traj.add(points.get(i).toBundle());
+    }
   }
 }

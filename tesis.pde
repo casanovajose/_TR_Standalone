@@ -9,6 +9,11 @@ ControlP5 Cp5;
 Tablet tablet;
 OscP5 oscP5;
 NetAddress myRemoteLocation;
+//current traj
+ArrayList<Point> points = new ArrayList<Point>();
+ArrayList<OscBundle> traj = new ArrayList<OscBundle>();
+// traj index
+int ti;
 //
 PGraphics c;
 Canvas canvas;
@@ -21,8 +26,18 @@ byte PLAY = 20;
 // idle by default
 byte mode = IDLE;
 
+//
+
+
 void setup() {
   size(600, 600, P2D);
+  
+  // NETWORK
+  // listening port 
+  oscP5 = new OscP5(this, 667);  
+  // sending port
+  myRemoteLocation = new NetAddress("127.0.0.1", 666);
+  
   // surface.setResizable(true);
   c = createGraphics(500, 500, P2D);
   //fullScreen();
@@ -35,24 +50,29 @@ void setup() {
   colorMode(HSB, 360, 100, 100);
   
   //frameRate(30);
-  frameRate(10);
+  frameRate(IDLE);
 }
 
-void draw() {
-  
+void draw() {  
   // background(0,0, 100);
   if (mousePressed) {
     canvas.drawPoints();
-  }
+  }  
   
-  if (keyPressed && key == 's') {
-    canvas.saveTrajectory();    
-  }
+  if (mode == PLAY) {
+    oscP5.send(traj.get(ti), myRemoteLocation);
+    stroke(0, 90, 50);
+    strokeWeight(2);
+    Point p = points.get(ti);
+    point(p.x+50, p.y+50);
+    ti++; if (ti >= traj.size()) { ti = 0;}
+  }  
 }
 
 
 void mousePressed() {
   isDrawing = true;
+  mode = DRAW;
   frameRate(DRAW);
 }
 
@@ -69,5 +89,17 @@ void keyPressed() {
   if (keyPressed && key == 'q') {
     canvas.removePoints();
     canvas.drawCanvas();
-  } 
+  }
+  if (keyPressed && key == 's') {
+    canvas.saveTrajectory();
+    canvas.loadTrajBundles();
+    traj = canvas.traj;
+    points = canvas.points;
+    println("traj len: "+ traj.size());
+  }
+  
+  if (keyPressed && key == 'p') {
+    mode = PLAY;
+    frameRate(PLAY);
+  }
 }

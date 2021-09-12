@@ -29,6 +29,14 @@ class Point {
     return x+","+y+","+a+","+dist+","+vel+","+cmd ;
   }
   
+  OscBundle toBundle() {
+    OscBundle b = new OscBundle();
+    OscMessage msg = new OscMessage("/x"); 
+    msg.add(x); b.add(msg); msg.clear();
+    msg.setAddrPattern("/y"); msg.add(y); b.add(msg); msg.clear();
+    return b;
+  }
+  
   void calcVel () {
     float velX = abs(x-px);
     float velY = abs(y-py);
