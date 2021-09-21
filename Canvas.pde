@@ -6,6 +6,7 @@ class Canvas {
   ArrayList <Point> points;
   ArrayList<OscBundle> traj = new ArrayList<OscBundle>();
   PGraphics cnv;
+  PImage prev;
   Tablet tablet;
   int x, y;
   float pf; // pressure factor
@@ -37,7 +38,8 @@ class Canvas {
   void drawCanvas() {
     cnv.beginDraw();
     cnv.colorMode(HSB, 360, 100, 100, 100);
-    cnv.fill(0, 0, 100);
+    cnv.background(0, 0, 100);
+    cnv.noFill();
     cnv.stroke(0);
     cnv.rect(0, 0, cnv.width-1, cnv.height-1);
     cnv.endDraw();
@@ -55,6 +57,9 @@ class Canvas {
 
   void drawPoints() {
     cnv.beginDraw();
+    //cnv.background(0, 0, 100);
+    
+    if(prev != null) { cnv.image(prev, 0, 0);}
     cnv.colorMode(HSB, 360, 100, 100, 100);
     Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
     
@@ -63,8 +68,6 @@ class Canvas {
     cnv.strokeWeight(press);
     // if too long check interpolation for long lines
               
-    
-    // println(vel);
     float vel = map(p.vel, 0, 100, 20, 340);
     //println(p.a);
     cnv.stroke(vel, 50, 80);
@@ -72,12 +75,11 @@ class Canvas {
     // marks
     
     // TODO modulo according speed
-    ///println(vel);
     if (points.size() % 30 == 0) {
-     
-      cnv.textFont(font, 15);
+      cnv.stroke(0,0,0); 
+      cnv.textFont(font, 12);
       // cnv.strokeWeight(10);
-      //cnv.textSize(22);
+      cnv.textSize(22);
       cnv.text(m, mouseX-x, mouseY-y);
       m++;
     } else {
@@ -89,8 +91,12 @@ class Canvas {
     //
     cnv.noStroke();
     cnv.ellipse(250, 500, 6, 6);
+    cnv.noFill();
+    cnv.stroke(0);
+    cnv.rect(0, 0, cnv.width-1, cnv.height-1);
     cnv.endDraw();
     image(cnv, x, y);
+    prev = cnv.copy();
     points.add(p);    
   }
   

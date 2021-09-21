@@ -14,6 +14,13 @@ ArrayList<Point> points = new ArrayList<Point>();
 ArrayList<OscBundle> traj = new ArrayList<OscBundle>();
 // traj index
 int ti;
+
+// scene array
+String [] defaultScene = {"L", "R"};
+String [] defaultReverb = {"L", "R"};
+ArrayList<PImage> scene = new ArrayList<PImage>();
+ArrayList<PImage> sceneReverb = new ArrayList<PImage>();
+
 //
 PGraphics c;
 Canvas canvas;
@@ -25,9 +32,10 @@ byte DRAW = 40;
 byte PLAY = 20;
 // idle by default
 byte mode = IDLE;
-
+boolean displayScene = false;
 //
-
+int cOffX = 50;
+int cOffY = 50;
 
 void setup() {
   size(600, 600, P2D);
@@ -44,13 +52,19 @@ void setup() {
   background(255);
   tablet = new Tablet(this); //<>//
   
-  canvas = new Canvas(c, 50, 50, tablet);
+  canvas = new Canvas(c, cOffX, cOffY, tablet);
   canvas.setUsingTablet(false);
   canvas.drawCanvas();
   colorMode(HSB, 360, 100, 100);
   
   //frameRate(30);
   frameRate(IDLE);
+  
+  // load scene
+  for(int i = 0; i< defaultScene.length ; i++){
+    scene.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
+    sceneReverb.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
+  }
 }
 
 void draw() {  
@@ -58,6 +72,10 @@ void draw() {
   if (mousePressed) {
     canvas.drawPoints();
   }  
+  
+  if(displayScene) {
+    displayScene();
+  }
   
   if (mode == PLAY) {
     oscP5.send(traj.get(ti), myRemoteLocation);
@@ -85,10 +103,12 @@ void mouseReleased() {
 }
 
 void keyPressed() {
+  
 // clearCanvas
   if (keyPressed && key == 'q') {
     canvas.removePoints();
     canvas.drawCanvas();
+    canvas.prev = null;
   }
   if (keyPressed && key == 's') {
     canvas.saveTrajectory();
@@ -101,5 +121,29 @@ void keyPressed() {
   if (keyPressed && key == 'p') {
     mode = PLAY;
     frameRate(PLAY);
+  }
+  
+  if (keyPressed && key == 'd') {
+     displayScene = true;
+  } 
+}
+
+void keyReleased() {
+   displayScene = false;
+}
+
+void displayScene() {
+ // scene 
+ for(int i = 0; i< defaultScene.length ; i++){
+    tint(255, 10);
+    image(scene.get(i), cOffX, cOffY);
+    noTint();
+   // sceneReverb.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
+ }
+ 
+ // reverb
+ for(int i = 0; i< defaultScene.length ; i++){
+   // scene.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
+   // sceneReverb.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
   }
 }
