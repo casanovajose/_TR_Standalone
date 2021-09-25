@@ -8,7 +8,7 @@ class Canvas {
   PGraphics cnv;
   PImage prev;
   Tablet tablet;
-  int x, y;
+  int x, y, xSize, ySize;
   float pf = 5; // pressure factor
   boolean usingTablet;
   int m; // marker count
@@ -17,7 +17,7 @@ class Canvas {
   Scene scene;
   boolean displayScene = true;
 
-  Canvas(PGraphics cnv, int x, int y, Tablet tablet) {
+  Canvas(PGraphics cnv, int x, int y, int xSize, int ySize,Tablet tablet) {
     this.font = loadFont("CourierNewPSMT-48.vlw");
     cnv.textFont(font, 128);
     this.usingTablet = false;
@@ -32,7 +32,9 @@ class Canvas {
     
     this.x = x;
     this.y = y;
-    //println(this.cnv);
+    this.xSize = xSize;
+    this.ySize = ySize;
+
     this.m = 1;
     
     this.scene = new Scene();
@@ -53,8 +55,8 @@ class Canvas {
   }
   
   boolean isInsideCanvas() {    
-    if(mouseX > location.x && mouseX < location.x + size.x &&
-       mouseY > location.y && mouseY < location.y + size.y
+    if(mouseX > x && mouseX < x + xSize &&
+       mouseY > y && mouseY < y + ySize
     ) {
       return true;
     }
@@ -62,36 +64,32 @@ class Canvas {
   }
 
   void drawPoints(boolean first) {
-    //println(first);
+    
     cnv.beginDraw();
     cnv.colorMode(HSB, 360, 100, 100, 100);
     cnv.background(0, 10, 100, 3);
     cnv.image(scene.sceneRevB, 0, 0);
     if(prev != null) { cnv.image(prev, 0, 0);}
-    
-    Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
-    //println(tablet.getPressure() );
-    
-    
-    
-    // if too long check interpolation for long lines              
-    float vel = map(p.vel, 0, 50, 20, 340);
-    // println("vel", vel);
-    cnv.strokeWeight(2);
-    cnv.stroke(vel, 80, 80, 60);
-    if(first) {
-    
-    } else {
-      cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
+    if(isInsideCanvas()){      
+      Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
+      
+      // if too long check interpolation for long lines              
+      float vel = map(p.vel, 0, 50, 20, 340);
+      // println("vel", vel);
+      cnv.strokeWeight(2);
+      cnv.stroke(vel, 80, 80, 60);
+      if(first) {    
+      } else {
+        cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
+      }    
+      // marks    
+      // TODO modulo according speed
+      drawTextMarker(cnv);
+      // points
+      drawPointMarker(cnv, vel);
+      p.setValues(scene.getValuesAt(p.x, p.y));
+      points.add(p);
     }
-    
-    // marks    
-    // TODO modulo according speed
-    drawTextMarker(cnv);
-    // points
-    drawPointMarker(cnv, vel);
-    p.setValues(scene.getValuesAt(p.x, p.y));
-    //println(p.dist);
         
     cnv.fill(0,0,0);    
     cnv.noStroke();
@@ -100,10 +98,11 @@ class Canvas {
     cnv.endDraw();    
     prev = cnv.copy();    
     image(prev, x, y);
-    points.add(p);    
+        
   }
   
   void closePath() {
+    if(!isInsideCanvas()){return;};
     points.get(points.size() - 1).setCmd("END");
   }
   
@@ -123,7 +122,7 @@ class Canvas {
       _points[i] = points.get(i).toString();
     }
     int nro = 0;
-    saveStrings("traj/traj"+nro, _points);
+    saveStrings("traj/traj"+nro+".tr", _points);
   }
   
   void loadTrajectory(String name) {

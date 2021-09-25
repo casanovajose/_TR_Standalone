@@ -55,7 +55,6 @@ class Scene {
       //val [speakers+i] = ;
       
     }
-    println(brightness(sceneReverb.get(0).get(x, y)));
     return val;
   }
   
