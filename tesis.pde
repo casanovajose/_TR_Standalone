@@ -14,17 +14,18 @@ ArrayList<Point> points = new ArrayList<Point>();
 ArrayList<OscBundle> traj = new ArrayList<OscBundle>();
 // traj index
 int ti;
-
-
 //
 PGraphics c;
 Canvas canvas;
-boolean isDrawing = false;
+PFont font;
+color green = color(59, 170, 85); // font color
+boolean firstClicked = true;
+
 
 // modes
-byte IDLE = 10;
+byte IDLE = 5;
 byte DRAW = 40;
-byte PLAY = 20;
+byte PLAY = 10;
 // idle by default
 byte mode = IDLE;
 boolean displayScene = false;
@@ -32,9 +33,13 @@ boolean displayScene = false;
 int cOffX = 50;
 int cOffY = 50;
 
+
 void setup() {
-  size(600, 600, P2D);
-  
+  size(780, 600, P2D);
+  colorMode(HSB, 360, 100, 100);
+  background(0, 0, 0);
+  font = loadFont("CourierNewPSMT-48.vlw");
+  textFont(font, 12);
   // NETWORK
   // listening port 
   oscP5 = new OscP5(this, 667);  
@@ -43,78 +48,83 @@ void setup() {
   
   // surface.setResizable(true);
   c = createGraphics(500, 500, P2D);
-  //fullScreen();
-  background(255);
-  tablet = new Tablet(this); //<>//
-  
+  tablet = new Tablet(this);   //<>// //<>//
   canvas = new Canvas(c, cOffX, cOffY, tablet);
-  canvas.setUsingTablet(true);
+  canvas.setUsingTablet(false);
   canvas.drawCanvas();
-  colorMode(HSB, 360, 100, 100);
-  
-  //frameRate(30);
-  frameRate(IDLE);
-    
+  frameRate(IDLE);    
 }
 
 void draw() {  
-  
-  if(displayScene) {
-    canvas.displayScene = true;
+  background(0, 0, 0);
+  if (mousePressed && mode != PLAY) {
+    canvas.drawPoints(firstClicked);
+    firstClicked = false;
   } else {
-    canvas.displayScene = false;
+    canvas.drawCanvas();
   }
-  
-  // background(0,0, 100);
-  if (mousePressed) {
-    canvas.drawPoints();
-  }  
-  
     
-  if (mode == PLAY) {
+  if (mode == PLAY && traj.size() > 0) {
     oscP5.send(traj.get(ti), myRemoteLocation);
-    stroke(0, 90, 50);
-    strokeWeight(2);
+    stroke(green);
+    strokeWeight(8);
     Point p = points.get(ti);
     point(p.x+50, p.y+50);
     ti++; if (ti >= traj.size()) { ti = 0;}
-  }  
+  }
+  //println(brightness(get(mouseX, mouseY)));
+  fill(green);
+  text("TRAJ POINTS: "+canvas.points.size(), 50, height -30);
 }
 
 
 void mousePressed() {
-  isDrawing = true;
-  mode = DRAW;
-  frameRate(DRAW);
+  
+  if(mode != PLAY) {
+    firstClicked = true;
+    mode = DRAW;
+    frameRate(DRAW);
+  }  
+}
+
+void mouseMoved() {
+  firstClicked = false;
 }
 
 void mouseReleased() {
-  frameRate(IDLE);
-  isDrawing = false;
-  // set END cmp to last path point
-  canvas.closePath();
-  canvas.renderPoints();
+  if(mode != PLAY) {
+    frameRate(IDLE);
+    firstClicked = false;
+    // set END cmp to last path point
+    canvas.closePath();
+    canvas.renderPoints();
+  }
 }
 
-void keyPressed() {
-  
+void keyPressed() {  
 // clearCanvas
   if (keyPressed && key == 'q') {
     canvas.removePoints();
     canvas.drawCanvas();
     canvas.prev = null;
+    mode = IDLE;
   }
   if (keyPressed && key == 's') {
     canvas.saveTrajectory();
     canvas.loadTrajBundles();
     traj = canvas.traj;
     points = canvas.points;
-    println("traj len: "+ traj.size());
+    //println("traj len: "+ traj.size());
   }
   
   if (keyPressed && key == 'p') {
     mode = PLAY;
-    frameRate(PLAY);
+    frameRate(mode);
+  }
+  
+  if (keyPressed && key == 'o') {
+    mode = IDLE;
+    frameRate(mode);
   }
   
   if (keyPressed && key == 'd') {

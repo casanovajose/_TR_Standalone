@@ -5,12 +5,17 @@ class Point {
   int y;
   int px;
   int py;
+  //
   int ox;
   int oy;
+  //
   int vel;
-  int p;
-  double a;
-  int dist;
+  int press;
+  //
+  float[] dist;
+  float[] rev;
+  //double a;
+  //int dist;
   String cmd;
   
   Point(int x, int y, int px, int py, int offsetX, int offsetY) {
@@ -22,11 +27,18 @@ class Point {
     this.py = py;
     this.cmd = "_";
     this.calcVel();    
-    this.calcAngDist();
+    // this.calcAngDist();
+  }
+  
+  void setValues(float[] val) {
+    this.dist = subset(val, 0, val.length/2);
+    this.rev = subset(val, val.length/2, val.length/2);
+    
   }
   
   String toString() {
-    return x+","+y+","+a+","+dist+","+vel+","+cmd ;
+    return x+","+y+","+vel+","+cmd ;
+    
   }
   
   OscBundle toBundle() {
@@ -34,6 +46,10 @@ class Point {
     OscMessage msg = new OscMessage("/x"); 
     msg.add(x); b.add(msg); msg.clear();
     msg.setAddrPattern("/y"); msg.add(y); b.add(msg); msg.clear();
+    // dist + rev
+    msg.setAddrPattern("/scene"); msg.add(dist); b.add(msg); msg.clear();
+    
+    msg.setAddrPattern("/rev"); msg.add(rev); b.add(msg); msg.clear();
     return b;
   }
   
@@ -47,8 +63,8 @@ class Point {
   * Converts cartesian to polar
   */
   void calcAngDist () {
-    this.a = abs( (float)Math.toDegrees(Math.atan2(y-oy, x-ox)));
-    this.dist = (int) Math.sqrt(ox*ox + oy*oy);
+    //this.a = abs( (float)Math.toDegrees(Math.atan2(y-oy, x-ox)));
+    //this.dist = (int) Math.sqrt(ox*ox + oy*oy);
   }
   
   /**
