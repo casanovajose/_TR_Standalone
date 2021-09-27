@@ -17,9 +17,9 @@ class Canvas {
   Scene scene;
   boolean displayScene = true;
 
-  Canvas(PGraphics cnv, int x, int y, int xSize, int ySize,Tablet tablet) {
+  Canvas(PGraphics cnv, int x, int y, int xSize, int ySize, Tablet tablet) {
     this.font = loadFont("CourierNewPSMT-48.vlw");
-    cnv.textFont(font, 128);
+    cnv.textFont(font, 12);
     this.usingTablet = false;
     //this.size = new PVector(w, h);
     // this.location = new PVector(x, y);
@@ -115,14 +115,17 @@ class Canvas {
     // CONVERT POINTS TO SHAPE
   }
 
-  void saveTrajectory() {
+  void saveTrajectory(String name) {
+    name = trim(name);
+    if(name.length() == 0) { name = "default";}
+    
     String[] _points = new String[points.size()]; 
 
     for (int i = 0; i < points.size(); i++) {
       _points[i] = points.get(i).toString();
     }
-    int nro = 0;
-    saveStrings("traj/traj"+nro+".tr", _points);
+
+    saveStrings("traj/"+name+".tr", _points);
   }
   
   void loadTrajectory(String name) {

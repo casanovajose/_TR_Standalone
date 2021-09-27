@@ -1,97 +1,95 @@
 import controlP5.*;
 
 public static class Controls {
-  final static int column = 570;
+  final static int colUp = 80;
+  final static int column = 530;
   final static int row = 50;
+  final static int itmHeight = 22;
+  final static int itmWidth = 160;
   
   
   public static void config(ControlP5 c, PFont f) {
-    c.setFont(f, 13);  
+    //ControlFont.sharp();
+    ControlFont ff = new ControlFont(f, 12);
+    //ff.RENDER_2X = true;
+    c.setFont(ff);  
     // change the original colors
     c.setColorForeground(0x0050E320);
     c.setColorBackground(0xff224422);
     c.setColorCaptionLabel(0xff00e300);
     //c.setColor(new CColor());
     c.setColorActive(0xff00e300); 
-    
   }
-  
-  public static DropdownList getTrajDropdown(ControlP5 c, String path, int r) {
-    String [] items = getTrajList(path);
-    DropdownList ddl = c.addDropdownList("trajList")
+    
+  public static RadioButton  getRadioOptions(ControlP5 c, String name , String path, String ext,  boolean withNew, String selected, int r) {
+    String [] items = getFileList(path, ext, withNew);
+    RadioButton  ddl = c.addRadioButton (name)
             .setPosition(column ,r*row)
-            .addItems(items)
-            .setSize(150, 200)
-            .setItemHeight(20)
-            .setBarHeight(20)
-            .setBarVisible(true)
-            .setOpen(false)
-            //.setValueLabel("<NEW>")
+            //.addItems(items)
+            //.setSize(itmWidth, 200)
+            .setItemHeight(itmHeight-10)
+            .setNoneSelectedAllowed(false)
+            .toUpperCase(true)
+            //.setBarHeight(itmHeight)
+            //.setBarVisible(true)
+            //.setOpen(false)            
             ;    
     
-    ddl.setCaptionLabel("<NEW>");    
+    for(int i = 0; i < items.length; i++) {
+      ddl.addItem(items[i], i);
+    }
+    ddl.activate(selected);
     return ddl;
   }
   
-  public static Button getButton(ControlP5 c, String name,String i, int col, int r) {
+  public static Button getButton(ControlP5 c, String name, PImage def, PImage active, int col, int r, int offsetY) {
     Button b = c.addButton(name)
-      .setPosition(column + col ,r*row)
-      .setSize(42, 25)
-    ;    
+      .setPosition(col ,r*row+offsetY)
+      .setSize(25, 25)
+      .updateSize()
+      
+    ;
+    if (def != null){
+      b.setImage(def, Controller.DEFAULT);
+      b.setImage(active, Controller.ACTIVE);
+    }
     return b;
   }
   
-  
-  //---------- utils
-  
-  
-  
-    public static DropdownList getSceneDropdown(ControlP5 c, String path, int r) {
-    String [] items = getSceneList(path);
-    DropdownList ddl = c.addDropdownList("sceneList")
-            .setPosition(column ,r*row)
-            .addItems(items)
-            .setSize(150, 200)
-            .setItemHeight(20)
-            .setBarHeight(20)
-            .setBarVisible(true)
-            .setOpen(false)
-            
-            ;    
-    
-    ddl.setCaptionLabel("DEFAULT");    
-    return ddl;
+  public static Textfield getTextInput(ControlP5 c, String name, int r) {
+    Textfield t = c.addTextfield(name)
+      .setPosition(column, r*row)
+      .setSize(itmWidth, itmHeight)
+    ;    
+    return t;
   }
   
-  
-  public static String[] getTrajList(String path) {
-    java.io.File folder = new java.io.File(path+"/traj");
-    String[] filenames = {"<new>"};
+  public static Slider getSliderH(ControlP5 c, String name, float min, float max, int col, int r, int offsetY) {
+    Slider s = c.addSlider(name)
+      .setPosition(col, row*r+offsetY)
+      .setRange(min , max)
+      .setSize(itmWidth, itmHeight)
+      ;
+    return s;
+  }
+    
+  //----------------
+  //---------- utils
+  //----------------
+  public static String[] getFileList(String path, String ext, boolean withNew) {
+    java.io.File folder = new java.io.File(path);
+    String[] filenames = {};
+    if (withNew) { 
+      filenames = append(filenames, "<NEW>");
+    } 
     
     for (String file :  folder.list()) {
         // Check if string ends with extension
-        if (file.endsWith(".tr")) {
+        if (file.endsWith(ext)) {
           filenames = append(filenames, file);        
         }
     }
     
     return filenames;
   }
-  
-   public static String[] getSceneList(String path) {
-    java.io.File folder = new java.io.File(path+"/data/scenes");
-    String[] filenames = {};
-    
-    for (String file :  folder.list()) {
-        // Check if string ends with extension
-        //if (file.endsWith(".tr")) {
-          filenames = append(filenames, file);        
-        //}
-    }
-    
-    return filenames;
-  }
-  
-
-
 }
