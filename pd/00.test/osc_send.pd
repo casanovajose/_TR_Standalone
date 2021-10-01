@@ -1,0 +1,11 @@
+#N canvas 67 282 450 300 10;
+#X obj 183 123 netsend -u -b;
+#X obj 270 70 loadbang;
+#X text 180 40 default udp port;
+#X msg 180 70 connect 667;
+#X msg 90 50 disconnect;
+#X obj 50 80 oscformat;
+#X connect 1 0 3 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;
