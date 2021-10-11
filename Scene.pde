@@ -12,7 +12,7 @@ class Scene {
   PImage sceneMap = null;
 
   Scene() {
-    loadScene("ATC_pan_pan");
+    loadScene("stereo_LR");
   }
   
   void loadScene(String name) {
@@ -31,7 +31,7 @@ class Scene {
       }     
       
     }
-    speakers = defaultScene.length;
+    speakers = scene.size();
     println(scene.size());
     sceneB = scene.get(0).copy();
     //sceneB.filter(BLUR, 10);
@@ -52,7 +52,13 @@ class Scene {
     p.image(revB, 0, 0);
     p.tint(180, 50, 20, 60);
     p.image(sceneB, 0, 0);
+    p.noTint();
     //p.image(sceneReverb.get(1),0,0);
+    if(sceneMap != null) {
+      p.image(sceneMap, 0, 0);
+      //tint(43, 100, 100);
+    }
+   // p.image(sceneReverb.get(1), 0, 0);
     p.endDraw();
     //sceneB = p;
     sceneRevB = p;
@@ -104,7 +110,6 @@ class Scene {
   public String[] getFileList(String path) {
     java.io.File folder = new java.io.File(path);
     String[] filenames = {};
-   
     
     for (String file :  folder.list()) {
         // Check if string ends with extension
