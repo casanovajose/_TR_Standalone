@@ -33,7 +33,7 @@ class Point {
   void setValues(float[] val) {
     this.dist = subset(val, 0, val.length/2);
     this.rev = subset(val, val.length/2, val.length/2);
-    
+    //println(this.rev);
   }
   
   String toString() {
