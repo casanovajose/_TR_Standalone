@@ -12,7 +12,7 @@ class Scene {
   PImage sceneMap = null;
 
   Scene() {
-    loadScene("stereo_LR");
+    loadScene("quad_ch");
   }
   
   void loadScene(String name) {
@@ -50,7 +50,7 @@ class Scene {
     sceneB.filter(BLUR, 2);
     p.tint(0, 0, 100);
     p.image(revB, 0, 0);
-    p.tint(180, 50, 20, 60);
+    p.tint(180, 0, 20, 80);
     p.image(sceneB, 0, 0);
     p.noTint();
     //p.image(sceneReverb.get(1),0,0);
@@ -60,6 +60,7 @@ class Scene {
     }
    // p.image(sceneReverb.get(1), 0, 0);
     p.endDraw();
+    p.save("eg_dif.png");
     //sceneB = p;
     sceneRevB = p;
     //sceneRevB.blend(revB, 0, 0, 500, 500, 0, 0, 500, 500, ADD);

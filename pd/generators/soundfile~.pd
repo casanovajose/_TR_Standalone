@@ -10,7 +10,7 @@
 #X text 320 40 > 1 => loop | 0 => no loop;
 #X msg 30 110 open \$1 \, 1;
 #X obj 500 100 vsl 24 83 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
-#000000 #000000 0 1;
+#000000 #000000 7100 1;
 #X obj 410 120 bng 46 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 360 320 openpanel;
@@ -30,7 +30,7 @@
 #X connect 1 0 0 0;
 #X connect 1 1 19 0;
 #X connect 2 0 0 1;
-#X connect 3 0 9 0;
+#X connect 3 0 1 0;
 #X connect 4 0 15 0;
 #X connect 5 0 6 1;
 #X connect 9 0 1 0;

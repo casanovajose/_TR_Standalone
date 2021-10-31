@@ -20,6 +20,8 @@ public static class Controls {
     //c.setColor(new CColor());
     c.setColorActive(0xff00e300); 
   }
+  
+    
     
   public static RadioButton  getRadioOptions(ControlP5 c, String name , String path, String ext,  boolean withNew, String selected, int r) {
     String [] items = getFileList(path, ext, withNew);
@@ -37,6 +39,27 @@ public static class Controls {
     
     for(int i = 0; i < items.length; i++) {
       ddl.addItem(items[i], i);
+    }
+    ddl.activate(selected);
+    return ddl;
+  }
+  
+  public static RadioButton  getRadioFixedOptions(ControlP5 c, String name , String [] items, String selected, int col, int r, int offsetY) {    
+    RadioButton  ddl = c.addRadioButton (name)
+            .setPosition(col ,r*row+offsetY)
+            //.addItems(items)
+            .setSize(10,10)
+            .setItemHeight(itmHeight-10)
+            .setNoneSelectedAllowed(false)
+            .toUpperCase(true)
+            //.setBarHeight(itmHeight)
+            //.setBarVisible(true)
+            //.setOpen(false)            
+            ;    
+    
+    for(int i = 0; i < items.length; i++) {
+      ddl.addItem(items[i], i);
+      println(items[i]);
     }
     ddl.activate(selected);
     return ddl;
@@ -72,6 +95,17 @@ public static class Controls {
       .setSize(itmWidth, itmHeight)
       ;
     return s;
+  }
+  
+  public static Toggle getSwitch(ControlP5 c, String name, int col, int r, int offsetY) {
+    Toggle ch = c.addToggle(name)
+      .setPosition(col, row*r+offsetY)
+      .setSize(15, 15)
+      .setValue(false)
+      //.isLabelVisible(false)
+      .setCaptionLabel("l") 
+      ;
+    return ch;
   }
     
   //----------------

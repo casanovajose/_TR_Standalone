@@ -49,7 +49,8 @@ Button pause;
 Button stopButton;
 Button clearButton;
 //Button clear;
-CheckBox loop;
+RadioButton loopSelect;
+RadioButton useTablet;
 Textfield trajNameInput;
 String trajName = "";
 
@@ -96,10 +97,17 @@ void setup() {
    cp5 = new ControlP5(this);
    Controls.config(cp5, font);
    
+   String [] optionsLoop = {"loop", "no loop"};
+   String [] optionsTablet = {"tablet", "no tablet"};
+   
+   //loop = Controls.getSwitch(cp5, "loop", Controls.colUp*4 , 1, -20);
+   loopSelect = Controls.getRadioFixedOptions(cp5, "loopSelector", optionsLoop, "loop", Controls.colUp*4 , 1, -30);
    play = Controls.getButton(cp5, "play", playDefault, playActive , Controls.colUp*5 , 1, -20);
    
    pause = Controls.getButton(cp5, "pause", pauseDefault, pauseActive, Controls.colUp*5 + 50 , 1, -20);
    stopButton = Controls.getButton(cp5, "stopButton", stopDefault, stopActive, Controls.colUp*5 + 100 , 1, -20);
+   
+   useTablet = Controls.getRadioFixedOptions(cp5, "useTablet", optionsTablet, "no tablet", Controls.column , 1, -30);
    
   // separator
   tempo = Controls.getSliderH(cp5, "duration", 0.005, 4, Controls.colUp, 1, -20);
@@ -225,8 +233,35 @@ public void clearButton(int value){
 void keyPressed() {}
 void keyReleased() {}
 
+
+
 public void separator(String text, int c ,int r, int w, int h) {
     text("---"+text+"---", c, r, w, h);
+}
+
+
+/* incoming osc message are forwarded to the oscEvent method. */
+void oscEvent(OscMessage msg) {
+  switch (msg.addrPattern()) {
+    case "/play":
+      println("play");
+    case "/stop":
+      println("stop");
+    case "/pause":
+      println("pause");
+    case "/duration":
+      println("duration");
+    case "/traj":
+      println("traj");
+    
+    default:
+      break;  
+  }
+  
+  /* print the address pattern and the typetag of the received OscMessage */
+  print("### received an osc message.");
+  print(" addrpattern: "+msg.addrPattern());
+  println(" typetag: "+msg.typetag());
 }
 
 void trajTimer() {
