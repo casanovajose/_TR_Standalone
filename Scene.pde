@@ -12,7 +12,7 @@ class Scene {
   PImage sceneMap = null;
 
   Scene() {
-    loadScene("quad_ch");
+    loadScene("stereo_LR");
   }
   
   void loadScene(String name) {

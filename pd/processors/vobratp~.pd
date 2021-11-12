@@ -1,0 +1,31 @@
+#N canvas -961 73 450 386 10;
+#X obj 110 20 inlet~;
+#X obj 110 50 delwrite~ vibratop 50;
+#X obj 240 110 vsl 10 50 0 30 0 0 empty empty SPEED 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 300 110 vsl 10 50 0 30 0 0 empty empty DEPTH 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 290 180 nbx 2 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256 3;
+#X obj 230 180 nbx 2 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0 256 3;
+#X obj 221 228 osc~ 2;
+#X obj 221 258 *~ 1;
+#X obj 220 290 *~ 2;
+#X obj 300 230 * 2;
+#X obj 220 320 vd~ vibrato;
+#X obj 220 350 outlet~;
+#X obj 324 270 + 3;
+#X connect 0 0 1 0;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 4 0 9 0;
+#X connect 4 0 7 1;
+#X connect 4 0 12 1;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 1;
+#X connect 9 0 12 0;
+#X connect 10 0 11 0;
