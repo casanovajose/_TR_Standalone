@@ -1,0 +1,46 @@
+#N canvas 311 63 727 538 10;
+#X obj 70 170 *~ 0.9;
+#X obj 70 10 inlet~;
+#X obj 90 200 *~ 1;
+#X obj 70 260 outlet~;
+#X obj 396 295 vsl 10 100 0 0.98 0 0 empty empty FBK 0 -9 0 10 #fcfcfc
+#000000 #000000 4100 1;
+#X obj 328 345 nbx 5 14 -1e+37 1e+37 0 0 empty empty DELAY\ (ms) 0
+-8 0 10 #fcfcfc #000000 #000000 80 256 0;
+#X obj 120 120 lop~ 15000;
+#X obj 120 140 hip~ 50;
+#X obj 120 90 delread~ delay_feedback 300;
+#X obj 90 230 delwrite~ delay_feedback;
+#X obj 439 295 vsl 10 100 0 1000 0 0 empty empty LOW 0 -9 0 10 #fcfcfc
+#000000 #000000 1050 1;
+#X obj 502 295 vsl 10 100 1000 18000 0 0 empty empty HIGH 0 -9 0 10
+#fcfcfc #000000 #000000 3100 1;
+#X obj 378 405 nbx 4 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 0.405859 256 3;
+#X obj 418 404 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 106.061 256 3;
+#X obj 481 405 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#fcfcfc #000000 #000000 6323.23 256 3;
+#X obj 340 130 pack 0 20;
+#X obj 340 151 line;
+#X obj 410 129 pack 0 20;
+#X obj 410 150 line;
+#X connect 0 0 2 0;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 9 0;
+#X connect 4 0 0 1;
+#X connect 4 0 12 0;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 8 0 6 0;
+#X connect 10 0 13 0;
+#X connect 10 0 15 0;
+#X connect 11 0 14 0;
+#X connect 11 0 17 0;
+#X connect 15 0 16 0;
+#X connect 16 0 7 1;
+#X connect 17 0 18 0;
+#X connect 18 0 6 1;
+#X coords 0 -1 1 1 224 159 1 310 266;

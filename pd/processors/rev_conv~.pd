@@ -1,0 +1,26 @@
+#N canvas 0 0 1350 664 10;
+#X text 60 40 Feedbak Delay reverb with convolution;
+#X obj 460 130 cnv 15 102 60 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 118 149 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 165 119 vsl 10 100 0 127 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 2850 1;
+#X obj 207 119 vsl 10 100 0 127 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 4900 1;
+#X obj 251 120 vsl 10 100 0 127 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 3300 1;
+#X text 104 197 load IR;
+#X obj 200 300 outlet~;
+#X obj 300 300 outlet~;
+#X obj 60 60 inlet~;
+#X obj 150 237 nbx 4 12 -1e+37 1e+37 0 0 empty empty delay 0 -8 0 8
+#fcfcfc #000000 #000000 36.5606 256 0;
+#X obj 195 236 nbx 4 12 -1e+37 1e+37 0 0 empty empty fb 0 -8 0 8 #fcfcfc
+#000000 #000000 62.8586 256 0;
+#X obj 239 235 nbx 4 12 -1e+37 1e+37 0 0 empty empty conv\ mix 0 -8
+0 8 #fcfcfc #000000 #000000 42.3333 256 0;
+#X connect 3 0 10 0;
+#X connect 4 0 11 0;
+#X connect 5 0 12 0;
+#X coords 0 -1 1 1 202 158 1 100 100;

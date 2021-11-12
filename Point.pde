@@ -37,8 +37,10 @@ class Point {
   }
   
   String toString() {
-    return x+","+y+","+vel+","+cmd ;
+    String d = join(nf(dist), " ");
+    String r = join(nf(rev), " ");
     
+    return x+" "+y+" "+vel+" "+cmd+" "+ d + " "+ r +";" ;    
   }
   
   OscBundle toBundle() {
