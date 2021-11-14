@@ -52,7 +52,7 @@ Button clearButton;
 RadioButton loopSelect;
 RadioButton useTablet;
 Textfield trajNameInput;
-String trajName = "";
+//String trajName = "";
 
 Textfield source;
 Button saveButton;
@@ -78,7 +78,7 @@ void setup() {
   size(780, 600, P2D);
   colorMode(HSB, 360, 100, 100);
   background(0, 0, 0);
-  font = loadFont("CourierNewPSMT-48.vlw");
+  font = loadFont("SourceCodePro-Medium-48.vlw");
   //font = loadFont("Corbel-Bold-48.vlw");
   textFont(font, 12);
   path = sketchPath();
@@ -250,14 +250,20 @@ public void trajList(int t) {
   String name = trajList.getItem(t).getName();
   canvas.clearTraj();
   canvas.loadTrajectory(name);
+  trajNameInput.setText(name.toUpperCase());
 }
+
+
+// void trajName(String n) {
+//   println("input ", n);
+// }
 
 void keyPressed() {}
 void keyReleased() {}
 
 
 public void separator(String text, int c ,int r, int w, int h) {
-    text("---"+text+"---", c, r, w, h);
+    text("..."+text+"...", c, r, w, h);
 }
 
 
