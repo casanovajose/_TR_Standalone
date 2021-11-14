@@ -87,31 +87,8 @@ class Scene {
   }
 
   void displayScene(PGraphics c) {
-   // println("DISPLAY thr SCENE");
-   //c.tint(220, 90, 25, 20);
-   // c.image(sceneRevB, 0, 0);
-   c.image(scene.get(1), 0, 0);
-   
-   //c.noTint();
-   //c.tint(0, 90, 25, 20);
-   //c.image(revB, 0, 0);
-   //c.noTint();
-   //for(int i = 0; i< sceneReverb.size() ; i++){
-   //   c.tint(220, 90, 25, 20);
-   //   c.image(sceneReverb.get(i), 0, 0);
-   //   c.noTint();
-   //  // sceneReverb.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
-   //}
-   //// scene 
-   //for(int i = 0; i< scene.size() ; i++){
-   //   c.tint(0, 90, 25, 20);
-   //   c.image(scene.get(i), 0, 0);
-   //   c.noTint();
-   //  // sceneReverb.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
-   //}   
-   
+    c.image(scene.get(1), 0, 0); 
   }
-  
   
   public String[] getFileList(String path) {
     java.io.File folder = new java.io.File(path);
