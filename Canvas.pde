@@ -101,12 +101,12 @@ class Canvas {
   }
   
   void drawLine(PGraphics cnv, Point p, boolean first) {
-  // if too long check interpolation for long lines              
-    float vel = map(p.vel, 0, 50, 20, 340);
-    cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
-    cnv.stroke(vel, 80, 80, 50);
-    if(first) {    
-    } else {
+  // if too long check interpolation for long lines 
+    if(!first) {
+      println(p.cmd);        
+      float vel = map(p.vel, 0, 50, 20, 340);
+      cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
+      cnv.stroke(vel, 80, 80, 50);    
       cnv.line(p.x, p.y, p.px, p.py);
     }  
   }
@@ -125,6 +125,11 @@ class Canvas {
     // CONVERT POINTS TO SHAPE
   }
 
+  boolean isStartPoint(int idx) {
+    if (idx == 0) {return true;}
+    return points.get(idx-1).cmd.equals("END");
+  }
+
   void saveTrajectory(String name) {
     name = trim(name);
     if(name.length() == 0) { name = "base";}
@@ -132,6 +137,9 @@ class Canvas {
     String[] _points = new String[points.size()]; 
 
     for (int i = 0; i < points.size(); i++) {
+      if (isStartPoint(i)) {
+        points.get(i).cmd = "START";
+      }
       _points[i] = points.get(i).toString();
     }
 
@@ -151,13 +159,15 @@ class Canvas {
       String [] l = split(lines[i], " ");
       int x = int(l[0]);
       int y = int(l[1]);
+      String cmd = l[3];
 
       Point p = new Point(x, y, px, py, 250, 500);
       px = x;
       py = y; 
+      p.cmd = cmd;
+      boolean first = cmd.equals("START");
       points.add(p);
-      boolean first = i == 0;
-      drawLine(cnv, p, first);
+      drawLine(cnv, p, first);      
     }
     cnv.endDraw();    
     prev = cnv.copy();    
