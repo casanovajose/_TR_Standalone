@@ -41,17 +41,18 @@ class Canvas {
   }
 
   void setUsingTablet(boolean t) {this.usingTablet = t;}
-  
+  void drawScene() {
+    image(scene.sceneRevB, x, y);
+  }
+
   void drawCanvas() {
     cnv.beginDraw();
     cnv.colorMode(HSB, 360, 100, 100, 100);
-    cnv.background(0, 10, 100, 3);
-    cnv.image(scene.sceneRevB, 0, 0);
-    //cnv.image(scene.sceneReverb.get(0), 0, 0);
-    //cnv.image(scene.sceneReverb.get(1), 0, 0);
+    //cnv.background(0, 0, 0, 50);
     if(prev != null) { cnv.image(prev, 0, 0);}
     // frame
     drawRectFrame(cnv);
+
     cnv.endDraw();
     image(cnv, x, y);
   }
@@ -65,21 +66,15 @@ class Canvas {
     return false;
   }
 
-  void drawPoints(boolean first) {
-    
+  void drawPoints(boolean first) {    
     cnv.beginDraw();
-    cnv.colorMode(HSB, 360, 100, 100, 100);
-    cnv.background(0, 10, 100, 3);
-    cnv.image(scene.sceneRevB, 0, 0);
-    //cnv.image(scene.sceneReverb.get(0), 0, 0);
-    //cnv.image(scene.sceneReverb.get(1), 0, 0);
+    cnv.colorMode(HSB, 360, 100, 100, 100);    
     if(prev != null) { cnv.image(prev, 0, 0);}
     if(isInsideCanvas()){      
       Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
       
       // if too long check interpolation for long lines              
       float vel = map(p.vel, 0, 50, 20, 340);
-      // println("vel", vel);
       cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
       cnv.stroke(vel, 80, 80, 50);
       if(first) {    
@@ -91,18 +86,17 @@ class Canvas {
       drawTextMarker(cnv);
       // points
       drawPointMarker(cnv, vel);
-      p.setValues(scene.getValuesAt(p.x, p.y));
+            
       points.add(p);
     }
         
-    cnv.fill(0,0,0);    
-    cnv.noStroke();
-    cnv.ellipse(250, 500, 6, 6);
+    // cnv.fill(0,0,0);    
+    // cnv.noStroke();
+    // cnv.ellipse(250, 500, 6, 6);
     drawRectFrame(cnv);
     cnv.endDraw();    
     prev = cnv.copy();    
     image(prev, x, y);
-        
   }
   
   void closePath() {
@@ -121,7 +115,7 @@ class Canvas {
 
   void saveTrajectory(String name) {
     name = trim(name);
-    if(name.length() == 0) { name = "default";}
+    if(name.length() == 0) { name = "base";}
     
     String[] _points = new String[points.size()]; 
 
@@ -138,13 +132,18 @@ class Canvas {
   
   void removePoints() {
     points.removeAll(points);
+    cnv =createGraphics(500, 500, P2D);
     m = 1;
     // cnv.background(0, 0, 100);
   }
   
   void loadTrajBundles() {
+    traj.removeAll(traj);
+    println("Reloading points values for scene: " + scene.name);
     for(int i = 0; i < points.size(); i++) {
-      traj.add(points.get(i).toBundle());
+      Point p = points.get(i);
+      p.setValues(scene.getValuesAt(p.x, p.y));
+      traj.add(p.toBundle());
     }
   }
   

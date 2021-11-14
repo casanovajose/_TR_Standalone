@@ -71,6 +71,9 @@ boolean displayScene = false;
 int cOffX = 20;
 int cOffY = 65;
 
+
+//
+int sceneIdx = 1;
 void setup() {
   size(780, 600, P2D);
   colorMode(HSB, 360, 100, 100);
@@ -115,12 +118,12 @@ void setup() {
   // separator
    
    //
-   trajNameInput = Controls.getTextInput(cp5, "trajName", 2);
-   saveButton = Controls.getButton(cp5, "saveButton", saveDefault, saveActive, Controls.column + Controls.itmWidth + 5 , 2, 2);
-   clearButton = Controls.getButton(cp5, "clearButton", clearDefault, clearActive, Controls.column + Controls.itmWidth + 30 , 2, 2);
-   trajList = Controls.getRadioOptions(cp5, "trajList", path+"/traj", ".tr", true, "<NEW>", 3);
-   // separator
-   sceneList = Controls.getRadioOptions(cp5,"sceneList", path+"/data/scenes", "", false, "default", 8);
+  trajNameInput = Controls.getTextInput(cp5, "trajName", 2);
+  saveButton = Controls.getButton(cp5, "saveButton", saveDefault, saveActive, Controls.column + Controls.itmWidth + 5 , 2, 2);
+  clearButton = Controls.getButton(cp5, "clearButton", clearDefault, clearActive, Controls.column + Controls.itmWidth + 30 , 2, 2);
+  trajList = Controls.getRadioOptions(cp5, "trajList", path+"/traj", ".tr", true, "<NEW>", 3);
+  // separator
+  sceneList = Controls.getRadioOptions(cp5,"sceneList", path+"/data/scenes", "", false, "default", 8);
    
   
   // NETWORK
@@ -135,27 +138,25 @@ void setup() {
   canvas = new Canvas(c, cOffX, cOffY, 500, 500, tablet);
   canvas.setUsingTablet(false);
   canvas.drawCanvas();
-  frameRate(IDLE);    
+  frameRate(IDLE);  
 }
 
 void draw() {
-  //println(trajNameInput.getText());
   background(0, 0, 0);
+  
+  canvas.drawScene();  
   if (mousePressed && mode != PLAY) {
     canvas.drawPoints(firstClicked);
     firstClicked = false;    
   } else {
     canvas.drawCanvas();
   }
-    
   if (!isPaused && mode == PLAY && traj.size() > 0) {
     stroke(green);
     strokeWeight(8);
     if(ti < points.size()) {
-      Point p = points.get(ti);
-      // println(brightness( canvas.scene.scene.get(0).get(p.x, p.y)));
-      point(p.x+cOffX, p.y+cOffY);
-      //println(p.x, p.y);
+      Point p = points.get(ti);      
+      point(p.x+cOffX, p.y+cOffY);      
     }
   }
   
@@ -170,7 +171,6 @@ void draw() {
   text("TRAJ POINTS: "+canvas.points.size(), cOffX, height -20);
   // 
   text("_TR", cOffX, 30);
-  //println(mouseY);
 }
 
 
@@ -188,23 +188,35 @@ void mouseMoved() {
 
 void mouseReleased() {
   if(mode != PLAY) {
-    frameRate(IDLE);
+    //frameRate(IDLE);
     firstClicked = false;
     // set END cmp to last path point
     canvas.closePath();
-    canvas.renderPoints();
+    //canvas.renderPoints();
   }
 }
 
 public void saveButton(int value){
-  canvas.saveTrajectory(trajNameInput.getText());
+  String n = trajNameInput.getText();
+  n = trim(n).toLowerCase().replace(".tr","");
   canvas.loadTrajBundles();
+  canvas.saveTrajectory(n);
   traj = canvas.traj;
   points = canvas.points;
   ti = 0;
+  int idx = +trajList.getItems().size();
+  println("New traj index: " + trajList.getItem(n));
+  if (trajList.getItem(n) == null) {
+    trajList.addItem(n, idx);    
+  }
+  trajList.activate(n);
+  
 }
 
-public void play(int value){
+public void play(int value) {
+  canvas.loadTrajBundles();
+  traj = canvas.traj;
+  points = canvas.points;
   println(value);
   mode = PLAY;
   isPaused = false;
@@ -230,9 +242,14 @@ public void clearButton(int value){
   mode = IDLE;
 }
 
+public void sceneList(int a) {
+  String name = sceneList.getItem(a).getName();
+  println("switching to scene " + name);
+  canvas.scene.loadScene(name);
+}
+
 void keyPressed() {}
 void keyReleased() {}
-
 
 
 public void separator(String text, int c ,int r, int w, int h) {
@@ -266,11 +283,11 @@ void oscEvent(OscMessage msg) {
 
 void trajTimer() {
   int lastEvent = millis();
-  while(!isPaused && traj.size() > 0) {
+  while(!isPaused && canvas.traj.size() > 0) {
     //point(random(6,width), random(8, height));
     if(millis()- lastEvent > 1000 * tempo.getValue()) {
       if (ti >= points.size()) { ti = 0;}
-      oscP5.send(traj.get(ti), myRemoteLocation);
+      oscP5.send(canvas.traj.get(ti), myRemoteLocation);
       ti++;
       lastEvent = millis();
     }

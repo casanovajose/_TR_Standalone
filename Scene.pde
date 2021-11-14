@@ -1,5 +1,6 @@
 class Scene {
   int speakers;
+  String name;
   // scene array
   String [] defaultScene = {"L", "R"};
   String [] defaultReverb = {"reverb_L", "reverb_R"};
@@ -12,10 +13,16 @@ class Scene {
   PImage sceneMap = null;
 
   Scene() {
-    loadScene("stereo_LR");
+    loadScene("default");
   }
   
   void loadScene(String name) {
+    this.sceneB = null;
+    this.revB = null;
+    this.sceneRevB = null;
+    this.scene.removeAll(this.scene);
+    this.sceneReverb.removeAll(this.sceneReverb);
+    this.name = name;
     try {
       sceneMap = loadImage("scenes/"+name+"/map.png");
     } catch (Exception e) {
@@ -32,7 +39,7 @@ class Scene {
       
     }
     speakers = scene.size();
-    println(scene.size());
+    // println(scene.size());
     sceneB = scene.get(0).copy();
     //sceneB.filter(BLUR, 10);
     revB = sceneReverb.get(0).copy();
@@ -60,7 +67,7 @@ class Scene {
     }
    // p.image(sceneReverb.get(1), 0, 0);
     p.endDraw();
-    p.save("eg_dif.png");
+    p.save("current_scene.png");
     //sceneB = p;
     sceneRevB = p;
     //sceneRevB.blend(revB, 0, 0, 500, 500, 0, 0, 500, 500, ADD);
@@ -68,11 +75,9 @@ class Scene {
 
   float[] getValuesAt(int x, int y) {
     float [] val = new float [scene.size()*2];
-    for(int i = 0; i< scene.size() ; i++){
+    for(int i = 0; i < scene.size() ; i++){
       val [i] = brightness(scene.get(i).get(x, y));
       val [speakers+i] = brightness(sceneReverb.get(i).get(x, y));
-      //val [speakers+i] = ;
-      
     }
     return val;
   }
