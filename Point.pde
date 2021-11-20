@@ -48,6 +48,7 @@ class Point {
     OscMessage msg = new OscMessage("/x"); 
     msg.add(x); b.add(msg); msg.clear();
     msg.setAddrPattern("/y"); msg.add(y); b.add(msg); msg.clear();
+    msg.setAddrPattern("/vel"); msg.add(vel); b.add(msg); msg.clear();
     // dist + rev
     msg.setAddrPattern("/scene"); msg.add(this.dist); b.add(msg); msg.clear();    
     msg.setAddrPattern("/rev"); msg.add(this.rev); b.add(msg); msg.clear();

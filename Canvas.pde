@@ -103,7 +103,6 @@ class Canvas {
   void drawLine(PGraphics cnv, Point p, boolean first) {
   // if too long check interpolation for long lines 
     if(!first) {
-      println(p.cmd);        
       float vel = map(p.vel, 0, 50, 20, 340);
       cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
       cnv.stroke(vel, 80, 80, 50);    
