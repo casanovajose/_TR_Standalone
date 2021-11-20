@@ -1,0 +1,31 @@
+#N canvas 207 72 1039 490 10;
+#X obj 281 272 *~;
+#X obj 320 170 noise~;
+#X obj 335 271 *~;
+#X obj 310 271 *~;
+#X obj 364 272 *~;
+#X obj 670 100 tgl 15 0 empty empty LF 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 670 130 tgl 15 0 empty empty LR 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 760 100 tgl 15 0 empty empty RF 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 760 132 tgl 15 0 empty empty RR 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 218 342 outlet~;
+#X obj 280 340 outlet~;
+#X obj 340 340 outlet~;
+#X obj 400 340 outlet~;
+#X connect 0 0 9 0;
+#X connect 1 0 0 0;
+#X connect 1 0 3 0;
+#X connect 1 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 11 0;
+#X connect 3 0 10 0;
+#X connect 4 0 12 0;
+#X connect 5 0 0 1;
+#X connect 6 0 3 1;
+#X connect 7 0 2 1;
+#X connect 8 0 4 1;
+#X coords 0 -1 1 1 150 92 1 658 79;
