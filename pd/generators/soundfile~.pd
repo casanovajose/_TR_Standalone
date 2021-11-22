@@ -11,14 +11,39 @@
 #X obj 190 280 outlet~;
 #X text 320 40 > 1 => loop | 0 => no loop;
 #X msg 30 110 open \$1 \, 1;
-#X connect 0 0 9 0;
+#X obj 500 100 vsl 24 83 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 7100 1;
+#X obj 410 120 bng 46 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 360 320 openpanel;
+#X obj 310 280 del 20;
+#X obj 30 230 print opening;
+#X obj 210 170 pack 0 50;
+#X obj 40 310 outlet;
+#X obj 40 280 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 110 310 outlet;
+#X obj 110 280 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 390 280 symbol sounds;
+#X text 400 190 open file;
+#X text 499 192 amp;
+#X connect 0 0 7 0;
 #X connect 1 0 0 0;
 #X connect 1 1 8 0;
 #X connect 2 0 0 1;
-#X connect 3 0 2 0;
-#X connect 5 0 11 0;
-#X connect 6 0 3 0;
-#X connect 7 0 8 1;
-#X connect 8 0 11 0;
-#X connect 11 0 4 0;
-#X connect 11 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 15 0;
+#X connect 5 0 6 1;
+#X connect 9 0 1 0;
+#X connect 9 0 14 0;
+#X connect 9 0 17 0;
+#X connect 10 0 15 0;
+#X connect 11 0 20 0;
+#X connect 11 0 13 0;
+#X connect 12 0 9 0;
+#X connect 15 0 2 0;
+#X connect 17 0 16 0;
+#X connect 19 0 18 0;
+#X connect 20 0 12 0;
+#X coords 0 -1 1 1 171 130 2 384 93;

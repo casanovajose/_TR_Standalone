@@ -76,8 +76,8 @@ class Canvas {
       // if too long check interpolation for long lines              
       float vel = map(p.vel, 0, 50, 20, 340);
       // println("vel", vel);
-      cnv.strokeWeight(2);
-      cnv.stroke(vel, 80, 80, 60);
+      cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
+      cnv.stroke(vel, 80, 80, 50);
       if(first) {    
       } else {
         cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
@@ -162,8 +162,8 @@ class Canvas {
   
   void drawPointMarker(PGraphics c, float v) {
     float press = this.usingTablet ? map(tablet.getPressure(), 0, 1, 1, pf) : 1;
-    c.strokeWeight(press * 4);
-    c.stroke(v, 80, 80, 40);
+    c.strokeWeight(press * 2);
+    c.stroke(v, 80, 80, 20);
     c.point(mouseX-x, mouseY-y);
   }
 }

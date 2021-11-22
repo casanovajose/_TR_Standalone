@@ -22,7 +22,7 @@
 #X obj 170 110 / 100;
 #X obj 120 310 pack 0 20;
 #X obj 310 350 pack 0 20;
-#X msg 250 150 wet 0.5 \, damping 0.1 \, dry 0 \, roomsize 0.48 \,
+#X msg 250 150 wet 0.8 \, damping 0.1 \, dry 0 \, roomsize 0.65 \,
 width 0.5;
 #X connect 0 0 3 0;
 #X connect 0 1 11 0;
