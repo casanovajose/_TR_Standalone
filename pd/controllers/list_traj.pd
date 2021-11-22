@@ -1,12 +1,12 @@
-#N canvas -1725 -36 875 497 10;
+#N canvas 237 83 1028 551 10;
 #X obj 606 108 hradio 15 0 1 5 traj_picker_traj empty empty 0 -8 0
-10 #fcfcfc #000000 #000000 3;
+10 #fcfcfc #000000 #000000 0;
 #X symbolatom 606 136 15 0 0 0 - - -, f 15;
 #X symbolatom 606 166 15 0 0 0 - - -, f 15;
 #X symbolatom 606 196 15 0 0 0 - - -, f 15;
 #X symbolatom 606 226 15 0 0 0 - - -, f 15;
 #X obj 500 126 tgl 15 0 empty empty ON/OFF 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X symbolatom 606 251 15 0 0 0 - - -, f 15;
 #X text 640 40 meg namespace: traj_picker;
 #X obj 830 170 demux 0 1 2 3 4;
@@ -16,7 +16,7 @@
 #X obj 850 220 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
 #000000 #000000;
 #X obj 688 108 nbx 1 15 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
-#fcfcfc #000000 #000000 4 256 0;
+#fcfcfc #000000 #000000 1 256 0;
 #X obj 640 440 outlet;
 #X obj 817 62 + 1;
 #X symbolatom 640 330 10 0 0 0 - - -, f 10;
@@ -35,19 +35,25 @@
 #X obj 500 244 bng 15 250 50 0 empty empty REW 17 7 0 10 #fcfcfc #000000
 #000000;
 #X msg 570 290 rewind;
-#X msg 780 340 read \$1.tr;
-#X obj 500 212 nbx 5 14 0 10000 0 1 empty empty TEMPO 0 -8 0 10 #fcfcfc
-#000000 #000000 1000 256 0;
-#X obj 390 190 metro 1000;
+#X obj 500 212 nbx 5 14 0 10000 0 1 empty empty TEMPO\ (ms) 0 -8 0
+10 #fcfcfc #000000 #000000 120 256 0;
 #X obj 420 320 spigot;
 #X obj 500 164 tgl 15 0 empty empty LOOP 17 7 0 10 #fcfcfc #000000
-#000000 0 1;
+#000000 1 1;
 #X msg 420 360 rewind;
+#X msg 780 340 read traj/\$1.tr;
+#X text 188 36 Save .tr inside the "traj" folder located in "controllers"
+;
+#X obj 264 90 unpack s s s s s;
+#X obj 264 61 inlet;
+#X obj 390 190 metro 100;
+#X obj 208 189 loadbang;
+#X msg 209 220 100;
 #X connect 1 0 15 0;
 #X connect 2 0 15 0;
 #X connect 3 0 15 0;
 #X connect 4 0 15 0;
-#X connect 5 0 29 0;
+#X connect 5 0 35 0;
 #X connect 6 0 15 0;
 #X connect 8 0 10 0;
 #X connect 8 1 11 0;
@@ -60,18 +66,26 @@
 #X connect 10 0 1 0;
 #X connect 11 0 2 0;
 #X connect 14 0 12 0;
-#X connect 15 0 27 0;
+#X connect 15 0 31 0;
 #X connect 16 0 3 0;
 #X connect 17 0 4 0;
 #X connect 18 0 6 0;
 #X connect 24 0 13 0;
-#X connect 24 1 30 0;
+#X connect 24 1 28 0;
 #X connect 25 0 26 0;
 #X connect 26 0 24 0;
-#X connect 27 0 24 0;
-#X connect 28 0 29 1;
-#X connect 29 0 24 0;
-#X connect 30 0 32 0;
-#X connect 31 0 30 1;
-#X connect 32 0 24 0;
+#X connect 27 0 35 1;
+#X connect 28 0 30 0;
+#X connect 29 0 28 1;
+#X connect 30 0 24 0;
+#X connect 31 0 24 0;
+#X connect 33 0 1 0;
+#X connect 33 1 2 0;
+#X connect 33 2 3 0;
+#X connect 33 3 4 0;
+#X connect 33 4 6 0;
+#X connect 34 0 33 0;
+#X connect 35 0 24 0;
+#X connect 36 0 37 0;
+#X connect 37 0 27 0;
 #X coords 0 -1 1 1 237 195 1 487 83;
