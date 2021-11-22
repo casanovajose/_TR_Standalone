@@ -27,18 +27,14 @@
 #X text 490 140 revR;
 #X obj 170 220 *~ 1;
 #X obj 230 220 *~ 1;
-#X obj 844 59 vu 8 120 visual_vu_R right\ ch -1 -8 0 5 #404040 #000000
-1 0;
-#X obj 783 58 vu 10 120 visual_vu_L left\ ch -4 -8 0 5 #404040 #000000
-1 0;
-#X obj 681 55 vsl 15 120 0 0.9 0 0 main_amp empty empty 0 -9 0 10 #fcfcfc
-#000000 #000000 11900 1;
-#X obj 733 58 vsl 15 120 0 0.9 0 0 rev_amp empty empty 0 -9 0 10 #fcfcfc
-#000000 #000000 11900 1;
-#X text 676 183 SRC;
-#X text 729 183 REV;
-#X text 784 185 L;
-#X text 845 184 R;
+#X obj 835 96 vu 10 80 visual_vu_R R -1 -8 0 10 #404040 #000000 1 0
+;
+#X obj 774 96 vu 10 80 visual_vu_L L -4 -8 0 10 #404040 #000000 1 0
+;
+#X obj 672 96 vsl 10 80 0 0.95 0 0 main_amp empty SRC 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 724 96 vsl 10 80 0 0.95 0 0 rev_amp empty REV 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X connect 0 0 6 0;
 #X connect 0 0 28 1;
 #X connect 1 0 5 0;
@@ -65,4 +61,4 @@
 #X connect 27 0 4 0;
 #X connect 30 0 13 0;
 #X connect 31 0 22 0;
-#X coords 0 -1 1 1 229 178 2 656 35;
+#X coords 0 -1 1 1 229 130 1 655 64;
