@@ -74,18 +74,19 @@ class Canvas {
       Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
       
       // if too long check interpolation for long lines              
-      float vel = map(p.vel, 0, 50, 20, 340);
-      cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
-      cnv.stroke(vel, 80, 80, 50);
-      if(first) {    
-      } else {
-        cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
-      }    
+      // float vel = map(p.vel, 0, 50, 20, 340);
+      // cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
+      // cnv.stroke(vel, 80, 80, 50);
+      // if(first) {    
+      // } else {
+      //   cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
+      // }
+      drawLine(cnv, p, first);
       // marks    
       // TODO modulo according speed
       drawTextMarker(cnv);
       // points
-      drawPointMarker(cnv, vel);
+      drawLineMarker(cnv, p.vel);
             
       points.add(p);
     }
@@ -99,6 +100,17 @@ class Canvas {
     image(prev, x, y);
   }
   
+  void drawLine(PGraphics cnv, Point p, boolean first) {
+  // if too long check interpolation for long lines              
+    float vel = map(p.vel, 0, 50, 20, 340);
+    cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
+    cnv.stroke(vel, 80, 80, 50);
+    if(first) {    
+    } else {
+      cnv.line(p.x, p.y, p.px, p.py);
+    }  
+  }
+
   void closePath() {
     if(!isInsideCanvas()){return;};
     points.get(points.size() - 1).setCmd("END");
@@ -127,7 +139,29 @@ class Canvas {
   }
   
   void loadTrajectory(String name) {
+    points.removeAll(points);
     // list files an find the t traj
+    String[] lines = loadStrings("traj/"+name+".tr");
+    // previous points
+    int px = 0;
+    int py = 0;
+    println("there are " + lines.length + " lines");
+    cnv.beginDraw();
+    for (int i = 0 ; i < lines.length; i++) {
+      String [] l = split(lines[i], " ");
+      int x = int(l[0]);
+      int y = int(l[1]);
+
+      Point p = new Point(x, y, px, py, 250, 500);
+      px = x;
+      py = y; 
+      points.add(p);
+      boolean first = i == 0;
+      drawLine(cnv, p, first);
+    }
+    cnv.endDraw();    
+    prev = cnv.copy();    
+    image(prev, x, y);
   }
   
   void removePoints() {
@@ -135,8 +169,14 @@ class Canvas {
     cnv =createGraphics(500, 500, P2D);
     m = 1;
     // cnv.background(0, 0, 100);
+  }  
+
+  void clearTraj() {
+    this.removePoints();
+    this.drawCanvas();
+    this.prev = null;
   }
-  
+
   void loadTrajBundles() {
     traj.removeAll(traj);
     println("Reloading points values for scene: " + scene.name);
@@ -163,7 +203,7 @@ class Canvas {
     }
   }
   
-  void drawPointMarker(PGraphics c, float v) {
+  void drawLineMarker(PGraphics c, float v) {
     float press = this.usingTablet ? map(tablet.getPressure(), 0, 1, 1, pf) : 1;
     c.strokeWeight(press * 2);
     c.stroke(v, 80, 80, 20);

@@ -236,16 +236,20 @@ public void stopButton(int value){
 
 public void clearButton(int value){
   ti = 0;
-  canvas.removePoints();
-  canvas.drawCanvas();
-  canvas.prev = null;
+  canvas.clearTraj();
   mode = IDLE;
 }
 
-public void sceneList(int a) {
-  String name = sceneList.getItem(a).getName();
+public void sceneList(int s) {
+  String name = sceneList.getItem(s).getName();
   println("switching to scene " + name);
   canvas.scene.loadScene(name);
+}
+
+public void trajList(int t) {
+  String name = trajList.getItem(t).getName();
+  canvas.clearTraj();
+  canvas.loadTrajectory(name);
 }
 
 void keyPressed() {}
