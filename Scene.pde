@@ -9,18 +9,30 @@ class Scene {
   PImage sceneB;
   PImage revB;
   PImage sceneRevB;
+  PImage sceneMap = null;
 
   Scene() {
-    loadScene("default");
+    loadScene("ATC_pan_pan");
   }
   
   void loadScene(String name) {
+    try {
+      sceneMap = loadImage("scenes/"+name+"/map.png");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     // load scene
-    for(int i = 0; i< defaultScene.length ; i++){
-      scene.add(loadImage("data/scenes/default/" + defaultScene[i] + ".png"));
-      sceneReverb.add(loadImage("data/scenes/default/reverb_" + defaultScene[i] + ".png"));
+    String [] files = this.getFileList(sketchPath() +"/data/scenes/" + name);
+    for(int i = 0; i< files.length ; i++){
+      if (files[i].startsWith("reverb")) {
+        sceneReverb.add(loadImage("data/scenes/"+name+"/" + files[i]));
+      } else {
+        scene.add(loadImage("data/scenes/"+name+"/" + files[i]));
+      }     
+      
     }
     speakers = defaultScene.length;
+    println(scene.size());
     sceneB = scene.get(0).copy();
     //sceneB.filter(BLUR, 10);
     revB = sceneReverb.get(0).copy();
@@ -31,14 +43,14 @@ class Scene {
       revB.blend(sceneReverb.get(i), 0, 0, 500, 500, 0, 0, 500, 500, ADD);
     }
     
-    
+    // visual
     PGraphics p = createGraphics(500, 500);
     p.beginDraw();
-    revB.filter(BLUR, 4);
-    sceneB.filter(BLUR, 4);
+    revB.filter(BLUR, 2);
+    sceneB.filter(BLUR, 2);
     p.tint(0, 0, 100);
     p.image(revB, 0, 0);
-    p.tint(180, 10, 10, 80);
+    p.tint(180, 50, 20, 60);
     p.image(sceneB, 0, 0);
     //p.image(sceneReverb.get(1),0,0);
     p.endDraw();
@@ -65,7 +77,9 @@ class Scene {
   void displayScene(PGraphics c) {
    // println("DISPLAY thr SCENE");
    //c.tint(220, 90, 25, 20);
-   c.image(sceneRevB, 0, 0);
+   // c.image(sceneRevB, 0, 0);
+   c.image(scene.get(1), 0, 0);
+   
    //c.noTint();
    //c.tint(0, 90, 25, 20);
    //c.image(revB, 0, 0);
@@ -86,4 +100,19 @@ class Scene {
    
   }
   
+  
+  public String[] getFileList(String path) {
+    java.io.File folder = new java.io.File(path);
+    String[] filenames = {};
+   
+    
+    for (String file :  folder.list()) {
+        // Check if string ends with extension
+        if (!file.startsWith("map")) {
+          filenames = append(filenames, file);        
+        }
+    }
+    
+    return filenames;
+  }
 }
