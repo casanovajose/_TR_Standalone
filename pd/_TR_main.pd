@@ -1,4 +1,4 @@
-#N canvas -1928 -323 1920 992 10;
+#N canvas 0 0 1350 664 10;
 #X obj 40 660 writesf~ 2;
 #X msg -190 640 start;
 #X msg -140 640 stop;
@@ -48,13 +48,18 @@
 #X floatatom 800 370 5 0 0 0 - - -, f 5;
 #X obj 1120 600 vcf~;
 #X obj 1270 330 vsl 15 128 0 1200 0 0 empty empty empty 0 -9 0 10 #fcfcfc
-#000000 #000000 10650 1;
+#000000 #000000 0 1;
 #X obj 1270 500 sig~;
 #X floatatom 1250 630 5 0 0 0 - - -, f 5;
 #X obj 730 660 writesf~ 2;
 #X msg 500 640 start;
 #X msg 550 640 stop;
 #X msg 870 660 open recordings/oom_base_1.wav;
+#X obj -20 -190 controllers/simple_OSC;
+#X floatatom 0 -150 5 0 0 0 - - -, f 5;
+#X floatatom 60 -150 5 0 0 0 - - -, f 5;
+#X floatatom 110 -150 5 0 0 0 - - -, f 5;
+#X floatatom 160 -150 5 0 0 0 - - -, f 5;
 #X connect 1 0 0 0;
 #X connect 2 0 0 0;
 #X connect 3 0 5 0;
@@ -65,7 +70,6 @@
 #X connect 5 1 0 1;
 #X connect 7 0 5 3;
 #X connect 7 1 5 4;
-#X connect 8 0 12 0;
 #X connect 12 0 9 0;
 #X connect 12 1 10 0;
 #X connect 12 2 11 0;
@@ -109,3 +113,7 @@
 #X connect 45 0 44 0;
 #X connect 46 0 44 0;
 #X connect 47 0 44 0;
+#X connect 48 3 49 0;
+#X connect 48 4 50 0;
+#X connect 48 5 51 0;
+#X connect 48 6 52 0;

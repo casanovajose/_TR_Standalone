@@ -59,7 +59,6 @@ public static class Controls {
     
     for(int i = 0; i < items.length; i++) {
       ddl.addItem(items[i], i);
-      println(items[i]);
     }
     ddl.activate(selected);
     return ddl;
@@ -120,7 +119,7 @@ public static class Controls {
     for (String file :  folder.list()) {
         // Check if string ends with extension
         if (file.endsWith(ext)) {
-          filenames = append(filenames, file);        
+          filenames = append(filenames, file.replace(".tr", ""));        
         }
     }
     

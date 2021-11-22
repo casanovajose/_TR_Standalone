@@ -1,2 +1,5 @@
-/data/*
-!/data/scenes/default
+node_modules/
+package-lock.json
+pd/recordings
+out/
+.vscode
