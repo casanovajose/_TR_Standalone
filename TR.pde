@@ -160,7 +160,7 @@ void draw() {
     }
   }
   
-  if(isPaused) {
+  if(isPaused && points.size() > 0) {
     Point p = points.get(ti);
     point(p.x+cOffX, p.y+cOffY);
   }
@@ -241,16 +241,31 @@ public void clearButton(int value){
 }
 
 public void sceneList(int s) {
-  String name = sceneList.getItem(s).getName();
-  println("switching to scene " + name);
-  canvas.scene.loadScene(name);
+  try {
+    String name = sceneList.getItem(s).getName();
+    println("switching to scene " + name);
+    canvas.scene.loadScene(name); 
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
 }
 
 public void trajList(int t) {
-  String name = trajList.getItem(t).getName();
-  canvas.clearTraj();
-  canvas.loadTrajectory(name);
-  trajNameInput.setText(name.toUpperCase());
+  try {
+    String name = trajList.getItem(t).getName();
+    canvas.clearTraj();
+    canvas.loadTrajectory(name);
+    trajNameInput.setText(name.toUpperCase());  
+    canvas.loadTrajBundles();
+    traj = canvas.traj;
+    points = canvas.points;
+    if(traj.size() == 0) {
+      isPaused = true;
+    }
+    ti = 0;
+  } catch (Exception e) {
+    e.printStackTrace();
+  }  
 }
 
 
@@ -292,14 +307,17 @@ void oscEvent(OscMessage msg) {
 }
 
 void trajTimer() {
-  int lastEvent = millis();
+  int lastEvent = millis();  
   while(!isPaused && canvas.traj.size() > 0) {
+
     //point(random(6,width), random(8, height));
-    if(millis()- lastEvent > 1000 * tempo.getValue()) {
-      if (ti >= points.size()) { ti = 0;}
-      oscP5.send(canvas.traj.get(ti), myRemoteLocation);
-      ti++;
-      lastEvent = millis();
+    if(millis()- lastEvent > 1000 * (tempo.getValue() / 10)) {
+      if (ti >= traj.size()) { ti = 0;}
+      if(canvas.traj.size() > 0) {        
+        oscP5.send(canvas.traj.get(ti), myRemoteLocation);
+        ti++;
+        lastEvent = millis();
+      }      
     }
   } 
 }

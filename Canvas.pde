@@ -42,7 +42,11 @@ class Canvas {
 
   void setUsingTablet(boolean t) {this.usingTablet = t;}
   void drawScene() {
-    image(scene.sceneRevB, x, y);
+    try {
+      image(scene.sceneRevB, x, y);      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   void drawCanvas() {
@@ -158,7 +162,7 @@ class Canvas {
       String [] l = split(lines[i], " ");
       int x = int(l[0]);
       int y = int(l[1]);
-      String cmd = l[3];
+      String cmd = l[4];
 
       Point p = new Point(x, y, px, py, 250, 500);
       px = x;

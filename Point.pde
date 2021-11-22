@@ -10,7 +10,7 @@ class Point {
   int oy;
   //
   int vel;
-  int press;
+  int press = 0;
   //
   float[] dist;
   float[] rev;
@@ -40,7 +40,7 @@ class Point {
     String d = join(nf(dist), " ");
     String r = join(nf(rev), " ");
     
-    return x+" "+y+" "+vel+" "+cmd+" "+ d + " "+ r +";" ;    
+    return x+" "+y+" "+vel+" "+press+" "+cmd+" "+ d + " "+ r +";" ;    
   }
   
   OscBundle toBundle() {
@@ -49,6 +49,8 @@ class Point {
     msg.add(x); b.add(msg); msg.clear();
     msg.setAddrPattern("/y"); msg.add(y); b.add(msg); msg.clear();
     msg.setAddrPattern("/vel"); msg.add(vel); b.add(msg); msg.clear();
+    msg.setAddrPattern("/press"); msg.add(press); b.add(msg); msg.clear();
+    msg.setAddrPattern("/cmd"); msg.add(cmd); b.add(msg); msg.clear();
     // dist + rev
     msg.setAddrPattern("/scene"); msg.add(this.dist); b.add(msg); msg.clear();    
     msg.setAddrPattern("/rev"); msg.add(this.rev); b.add(msg); msg.clear();
