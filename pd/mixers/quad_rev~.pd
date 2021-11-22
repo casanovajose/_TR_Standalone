@@ -1,18 +1,18 @@
 #N canvas 0 0 1350 664 10;
-#X obj 100 200 pvu~;
-#X obj 50 200 pvu~;
+#X obj 368 144 pvu~;
+#X obj 318 144 pvu~;
 #X obj 57 -137 inlet~;
 #X obj 57 53 outlet~;
 #X obj 117 53 outlet~;
-#X obj 50 230 outlet;
-#X obj 110 230 outlet;
+#X obj 318 174 outlet;
+#X obj 378 174 outlet;
 #X obj 117 -137 inlet~;
 #X obj 350 -80 line~;
 #X obj 60 -70 *~;
 #X obj 114 -70 *~;
 #X obj 350 -110 pack 0 50;
 #X obj 350 -140 inlet;
-#X text 120 260 Vumeter out;
+#X text 388 204 Vumeter out;
 #X obj 437 -50 inlet~;
 #X obj 497 -50 inlet~;
 #X obj 730 -80 line~;
@@ -22,21 +22,19 @@
 #X obj 730 -140 inlet;
 #X obj 57 3 *~ 1;
 #X obj 117 3 *~ 1;
-#X obj 781 172 vu 8 120 visual_vu_R LR -1 -8 0 5 #404040 #000000 1
+#X obj 777 160 vu 10 80 visual_vu_R LR -1 -8 0 10 #404040 #000000 1
 0;
-#X obj 720 171 vu 10 120 visual_vu_L LF -4 -8 0 5 #404040 #000000 1
+#X obj 716 160 vu 10 80 visual_vu_L LF -4 -8 0 10 #404040 #000000 1
 0;
-#X obj 618 168 vsl 15 120 0 0.9 0 0 main_amp empty empty 0 -9 0 10
-#fcfcfc #000000 #000000 9900 1;
-#X obj 670 171 vsl 15 120 0 0.9 0 0 rev_amp empty empty 0 -9 0 10 #fcfcfc
-#000000 #000000 3500 1;
-#X text 613 296 SRC;
-#X text 666 296 REV;
+#X obj 631 160 vsl 10 80 0 0.9 0 0 main_amp empty SRC 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 670 160 vsl 10 80 0 0.9 0 0 rev_amp empty REV 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X obj 0 -240 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
-#X obj 900 170 vu 8 120 visual_vu_R RR -1 -8 0 5 #404040 #000000 1
+#X obj 896 160 vu 8 80 visual_vu_RR RR -1 -8 0 10 #404040 #000000 1
 0;
-#X obj 839 169 vu 10 120 empty LF -4 -8 0 5 #404040 #000000 1 0;
+#X obj 835 160 vu 10 80 empty LF -4 -8 0 10 #404040 #000000 1 0;
 #X obj 180 -140 inlet~;
 #X obj 180 50 outlet~;
 #X obj 240 50 outlet~;
@@ -53,10 +51,10 @@
 #X obj 620 -50 inlet~;
 #X obj 563 17 *~;
 #X obj 617 17 *~;
-#X obj 220 200 pvu~;
-#X obj 170 200 pvu~;
-#X obj 170 230 outlet;
-#X obj 230 230 outlet;
+#X obj 488 144 pvu~;
+#X obj 438 144 pvu~;
+#X obj 438 174 outlet;
+#X obj 498 174 outlet;
 #X text 457 -10 revLF;
 #X text 507 -10 revLR;
 #X text 577 -10 revRF;
@@ -70,8 +68,8 @@
 #X connect 7 0 10 0;
 #X connect 8 0 10 1;
 #X connect 8 0 9 1;
-#X connect 8 0 36 1;
-#X connect 8 0 37 1;
+#X connect 8 0 34 1;
+#X connect 8 0 35 1;
 #X connect 9 0 21 0;
 #X connect 10 0 22 0;
 #X connect 11 0 8 0;
@@ -90,20 +88,20 @@
 #X connect 22 0 0 0;
 #X connect 25 0 11 0;
 #X connect 26 0 19 0;
-#X connect 32 0 36 0;
+#X connect 30 0 34 0;
+#X connect 33 0 35 0;
+#X connect 34 0 36 0;
 #X connect 35 0 37 0;
-#X connect 36 0 38 0;
-#X connect 37 0 39 0;
-#X connect 38 0 33 0;
-#X connect 38 0 49 0;
-#X connect 39 0 34 0;
-#X connect 39 0 48 0;
-#X connect 44 0 46 0;
-#X connect 45 0 47 0;
-#X connect 46 0 38 0;
-#X connect 47 0 39 0;
-#X connect 48 0 51 0;
-#X connect 48 0 30 1;
-#X connect 49 0 50 0;
-#X connect 49 0 31 0;
-#X coords 0 -1 1 1 340 207 1 599 118;
+#X connect 36 0 31 0;
+#X connect 36 0 47 0;
+#X connect 37 0 32 0;
+#X connect 37 0 46 0;
+#X connect 42 0 44 0;
+#X connect 43 0 45 0;
+#X connect 44 0 36 0;
+#X connect 45 0 37 0;
+#X connect 46 0 49 0;
+#X connect 46 0 28 1;
+#X connect 47 0 48 0;
+#X connect 47 0 29 0;
+#X coords 0 -1 1 1 342 140 1 612 118;
