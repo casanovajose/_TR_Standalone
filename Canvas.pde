@@ -76,7 +76,9 @@ class Canvas {
     if(prev != null) { cnv.image(prev, 0, 0);}
     if(isInsideCanvas()){      
       Point p = new Point(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y, 250, 500);
-      
+      if(usingTablet) {
+        p.press = tablet.getPressure();
+      }
       // if too long check interpolation for long lines              
       // float vel = map(p.vel, 0, 50, 20, 340);
       // cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
@@ -90,7 +92,7 @@ class Canvas {
       // TODO modulo according speed
       drawTextMarker(cnv);
       // points
-      drawLineMarker(cnv, p.vel);
+      drawLineMarker(cnv, p);
             
       points.add(p);
     }
@@ -108,7 +110,8 @@ class Canvas {
   // if too long check interpolation for long lines 
     if(!first) {
       float vel = map(p.vel, 0, 50, 20, 340);
-      cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
+      float press = map(p.press, 0, 1, 0.5, pf*2);
+      cnv.strokeWeight(this.usingTablet ? press : 2 );
       cnv.stroke(vel, 80, 80, 50);    
       cnv.line(p.x, p.y, p.px, p.py);
     }  
@@ -148,11 +151,23 @@ class Canvas {
 
     saveStrings("traj/"+name+".tr", _points);
   }
+
+  boolean isFileUsingTablet(String[] lines) {
+    for (int i = 0 ; i < lines.length; i++) {
+      String [] l = split(lines[i], " ");
+      if(float(l[3]) > 0) {
+        println("TABLET");
+        return true;
+      }
+    }
+    return false;
+  }
   
   void loadTrajectory(String name) {
     points.removeAll(points);
     // list files an find the t traj
     String[] lines = loadStrings("traj/"+name+".tr");
+    this.usingTablet = isFileUsingTablet(lines);
     // previous points
     int px = 0;
     int py = 0;
@@ -168,6 +183,7 @@ class Canvas {
       px = x;
       py = y; 
       p.cmd = cmd;
+      p.press = float(l[3]);
       boolean first = cmd.equals("START");
       points.add(p);
       drawLine(cnv, p, first);      
@@ -216,10 +232,10 @@ class Canvas {
     }
   }
   
-  void drawLineMarker(PGraphics c, float v) {
-    float press = this.usingTablet ? map(tablet.getPressure(), 0, 1, 1, pf) : 1;
+  void drawLineMarker(PGraphics c, Point p) {
+    float press = this.usingTablet ? map(p.press, 0, 1, 1, pf) : 1;
     c.strokeWeight(press * 2);
-    c.stroke(v, 80, 80, 20);
+    c.stroke(p.vel, 80, 80, 20);
     c.point(mouseX-x, mouseY-y);
   }
 }

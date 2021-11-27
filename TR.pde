@@ -102,8 +102,8 @@ void setup() {
    cp5 = new ControlP5(this);
    Controls.config(cp5, font);
    
-   String [] optionsLoop = {"loop", "no loop"};
-   String [] optionsTablet = {"tablet", "no tablet"};
+   String [] optionsLoop = {"no loop", "loop"};
+   String [] optionsTablet = {"no tablet", "tablet"};
    
    //loop = Controls.getSwitch(cp5, "loop", Controls.colUp*4 , 1, -20);
    loopSelect = Controls.getRadioFixedOptions(cp5, "loopSelector", optionsLoop, "loop", Controls.colUp*4 , 1, -30);
@@ -273,6 +273,10 @@ public void trajList(int t) {
   }  
 }
 
+void useTablet (int t) {
+  canvas.setUsingTablet(boolean(t));
+  print(canvas.usingTablet);
+}
 
 // void trajName(String n) {
 //   println("input ", n);

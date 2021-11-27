@@ -1,3 +1,4 @@
+
 import oscP5.*;
 
 class Point {
@@ -10,7 +11,7 @@ class Point {
   int oy;
   //
   int vel;
-  int press = 0;
+  float press = 0;
   //
   float[] dist;
   float[] rev;
@@ -39,7 +40,7 @@ class Point {
   String toString() {
     String d = join(nf(dist), " ");
     String r = join(nf(rev), " ");
-    
+    println(press);
     return x+" "+y+" "+vel+" "+press+" "+cmd+" "+ d + " "+ r +";" ;    
   }
   
