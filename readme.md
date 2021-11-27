@@ -38,14 +38,15 @@ Once created or loaded a trajectory on the GUI the OSC messaging can be used to 
 The *.tr* files generated when saving a trajectory can be used directly in *Pure Data*. The *.tr* file stores the information for a trayectory points using one line per point. Each line has the following format:
 
 ~~~
-< coord x > < coord y > < speed > < command > < scene direct values > < scene reverb values >
+< coord x > < coord y > < speed > < pressure > < command > < scene direct values > < scene reverb values >
 ~~~
 
 - The first two values are the coordinates (x, y) .
 - The 3rd is the speed or difference with a previous value.
-- The 4th is a *free* command. **START** and **END** indicates the begining and ending of the trajectory path or paths. These commands are useful e.g. to have more control on multipath trajectories.
-- The 5th is a groups of values of which contain the spatial information of the direct sound. Each value represents the amplitud for a speciic sound output. The values are separated by spaces. e.g. A quadraphonic trajectory will use 4 values.
-- The 6th is the group with the reverb value for each output.
+- The 4rd is the tablet pressure. If no tablet is 0.
+- The 5th is a *free* command. **START** and **END** indicates the begining and ending of the trajectory path or paths. These commands are useful e.g. to have more control on multipath trajectories.
+- The 6th is a groups of values of which contain the spatial information of the direct sound. Each value represents the amplitud for a speciic sound output. The values are separated by spaces. e.g. A quadraphonic trajectory will use 4 values.
+- The 7th is the group with the reverb value for each output.
 
 e.g of *.tr* file for a stereo *scene*
 ~~~

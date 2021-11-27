@@ -1,4 +1,4 @@
-#N canvas 0 0 1350 664 10;
+#N canvas -8 -8 1366 680 10;
 #X obj 0 -1 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
 #000000;
 #X text 16 13 Espacialidad híbrida;
@@ -34,6 +34,7 @@
 #X msg 349 43 mov_agua circle uncontrolled left_right spiral;
 #X text 194 114 "Baudelaire es el poeta";
 #X obj 43 39 generators/soundfile~;
+#X obj 857 116 controllers/dsp;
 #X connect 2 0 12 0;
 #X connect 3 0 31 0;
 #X connect 6 0 11 0;
