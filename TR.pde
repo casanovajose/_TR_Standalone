@@ -59,6 +59,7 @@ Button saveButton;
 Slider tempo;
 
 boolean isPaused;
+boolean isStopped;
 
 // modes
 byte IDLE = 35;
@@ -83,6 +84,7 @@ void setup() {
   textFont(font, 12);
   path = sketchPath();
   isPaused = false;
+  isStopped = true;
   // images - stupid and anoying icons
   playDefault = loadImage("icons/play_g.png");
   playActive = loadImage("icons/play_ga.png");
@@ -151,7 +153,7 @@ void draw() {
   } else {
     canvas.drawCanvas();
   }
-  if (!isPaused && mode == PLAY && traj.size() > 0) {
+  if ((!isPaused || !isStopped) && traj.size() > 0) {
     stroke(green);
     strokeWeight(8);
     if(ti < points.size()) {
@@ -220,6 +222,7 @@ public void play(int value) {
   println(value);
   mode = PLAY;
   isPaused = false;
+  isStopped = false;
   frameRate(mode);
   thread("trajTimer");
 }
@@ -229,6 +232,8 @@ public void pause(int value){
 }
 
 public void stopButton(int value){
+  isStopped = true;
+  isPaused = true;
   ti = 0;
   mode = IDLE;
   // frameRate(mode);
@@ -309,8 +314,6 @@ void oscEvent(OscMessage msg) {
 void trajTimer() {
   int lastEvent = millis();  
   while(!isPaused && canvas.traj.size() > 0) {
-
-    //point(random(6,width), random(8, height));
     if(millis()- lastEvent > 1000 * (tempo.getValue() / 10)) {
       if (ti >= traj.size()) { ti = 0;}
       if(canvas.traj.size() > 0) {        
