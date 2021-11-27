@@ -40,7 +40,6 @@ class Point {
   String toString() {
     String d = join(nf(dist), " ");
     String r = join(nf(rev), " ");
-    println(press);
     return x+" "+y+" "+vel+" "+press+" "+cmd+" "+ d + " "+ r +";" ;    
   }
   

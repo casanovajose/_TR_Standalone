@@ -20,14 +20,12 @@ class Canvas {
   Canvas(PGraphics cnv, int x, int y, int xSize, int ySize, Tablet tablet) {
     this.font = loadFont("CourierNewPSMT-48.vlw");
     cnv.textFont(font, 12);
-    this.usingTablet = false;
-    //this.size = new PVector(w, h);
-    // this.location = new PVector(x, y);
     this.points = new ArrayList<Point>();
     this.cnv = cnv;
     this.cnv.smooth(0);
     
     // tablet support
+    this.usingTablet = false;
     this.tablet = tablet; 
     
     this.x = x;
@@ -52,7 +50,6 @@ class Canvas {
   void drawCanvas() {
     cnv.beginDraw();
     cnv.colorMode(HSB, 360, 100, 100, 100);
-    //cnv.background(0, 0, 0, 50);
     if(prev != null) { cnv.image(prev, 0, 0);}
     // frame
     drawRectFrame(cnv);
@@ -62,9 +59,7 @@ class Canvas {
   }
   
   boolean isInsideCanvas() {    
-    if(mouseX > x && mouseX < x + xSize &&
-       mouseY > y && mouseY < y + ySize
-    ) {
+    if(mouseX > x && mouseX < x + xSize && mouseY > y && mouseY < y + ySize) {
       return true;
     }
     return false;
@@ -79,14 +74,7 @@ class Canvas {
       if(usingTablet) {
         p.press = tablet.getPressure();
       }
-      // if too long check interpolation for long lines              
-      // float vel = map(p.vel, 0, 50, 20, 340);
-      // cnv.strokeWeight(this.usingTablet ? map(tablet.getPressure(), 0, 1, 0.5, pf*2) : 2 );
-      // cnv.stroke(vel, 80, 80, 50);
-      // if(first) {    
-      // } else {
-      //   cnv.line(mouseX-x, mouseY-y, pmouseX-x, pmouseY-y);
-      // }
+      
       drawLine(cnv, p, first);
       // marks    
       // TODO modulo according speed
@@ -96,10 +84,7 @@ class Canvas {
             
       points.add(p);
     }
-        
-    // cnv.fill(0,0,0);    
-    // cnv.noStroke();
-    // cnv.ellipse(250, 500, 6, 6);
+
     drawRectFrame(cnv);
     cnv.endDraw();    
     prev = cnv.copy();    
@@ -107,7 +92,7 @@ class Canvas {
   }
   
   void drawLine(PGraphics cnv, Point p, boolean first) {
-  // if too long check interpolation for long lines 
+    // if too long check interpolation for long lines 
     if(!first) {
       float vel = map(p.vel, 0, 50, 20, 340);
       float press = map(p.press, 0, 1, 0.5, pf*2);
