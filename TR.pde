@@ -116,7 +116,7 @@ void setup() {
    
   // separator
   tempo = Controls.getSliderH(cp5, "duration", 0.005, 4, Controls.colUp, 1, -20);
-  tempo.setValue(0.5);
+  tempo.setValue(1);
   // separator
    
    //
@@ -140,7 +140,7 @@ void setup() {
   canvas = new Canvas(c, cOffX, cOffY, 500, 500, tablet);
   canvas.setUsingTablet(false);
   canvas.drawCanvas();
-  frameRate(IDLE);  
+  frameRate(DRAW);  
 }
 
 void draw() {
@@ -159,7 +159,12 @@ void draw() {
     if(ti < points.size()) {
       Point p = points.get(ti);      
       point(p.x+cOffX, p.y+cOffY);      
-    }
+    } else {
+			if(loopSelect.getValue() == 0) {
+					ti = 0;
+					isPaused = true;
+			}
+		}
   }
   
   if(isPaused && points.size() > 0) {
@@ -180,7 +185,7 @@ void mousePressed() {
   if(mode != PLAY) {
     firstClicked = true;
     mode = DRAW;
-    frameRate(DRAW);
+    //frameRate(DRAW);
   }  
 }
 
@@ -223,7 +228,7 @@ public void play(int value) {
   mode = PLAY;
   isPaused = false;
   isStopped = false;
-  frameRate(mode);
+  // frameRate(mode);
   thread("trajTimer");
 }
 
@@ -278,14 +283,6 @@ void useTablet (int t) {
   print(canvas.usingTablet);
 }
 
-// void trajName(String n) {
-//   println("input ", n);
-// }
-
-void keyPressed() {}
-void keyReleased() {}
-
-
 public void separator(String text, int c ,int r, int w, int h) {
     text("..."+text+"...", c, r, w, h);
 }
@@ -319,7 +316,9 @@ void trajTimer() {
   int lastEvent = millis();  
   while(!isPaused && canvas.traj.size() > 0) {
     if(millis()- lastEvent > 1000 * (tempo.getValue() / 10)) {
-      if (ti >= traj.size()) { ti = 0;}
+      if (ti >= traj.size()) {				
+				ti = 0;				
+			}
       if(canvas.traj.size() > 0) {        
         oscP5.send(canvas.traj.get(ti), myRemoteLocation);
         ti++;
