@@ -1,10 +1,38 @@
 # _TR WIP readme
 
-*_TR* is a sound sources spatialization framework focused on *Trayectories* and *Reverb (or ambience)* applied to sound sources.
+*_TR* is a sound sources spatialization framework focused on *Trajectories* and *Reverb (or ambience)* applied to sound sources.
 
 This repository represents a *prototype* (but a functional one) for a proposal of sound spatialization model.
 
 Soon the code contained here will be rewritten in a more optimal technology (Open Frameworks, WxWidgets ... not defined yet).
+
+## Usage
+
+- Download and install [Processing 4](https://processing.org/download)
+- Download and install Purr Data (not completly compatible with Pd vanilla yet)
+- Downlaod the source code and rename folder as *TR*
+
+On linux / unix
+```
+git clone https://github.com/casanovajose/_TR_Standalone.git
+mv _TR_Standalone TR
+
+```
+
+- Install the required libraries (ControlP5, oscP5, netP5, codeanticode.tablet) using the processing IDE
+
+- Add *processing-java* to path (if you don't need the Processing IDE, otherwise _TR can be executed from Processing IDE)
+
+On linux / unix
+```
+export PATH=<the processing folder location>:$PATH
+```
+- If processing folder is in PATH you can run using the following command (unix & windows):
+```
+processing-java --force --sketch=<the path to the TR folder> --output=<some temporary folder> --run 
+```
+You can create a .sh or a .bat in order to use as executable
+
 
 ## The spatialization model I
 
@@ -21,7 +49,7 @@ The audio processing is not a task for the interface. Since the GUI only generat
 | --- | --- | --- |
 | Controllers | Provide ways to control the spatial processing.| list_traj, simple\_OSC, simple\_OSC\_quad, sequencer16, simple\_OSC\_send |
 | Generators | Control on sound inputs (sound sources). | soundfile~, additive~, direct~, fm\_phase~ |
-| Spaces | Routing audio to speakers (stereo, quad, etc. ) | Stereo\_lr\_2~, quad~ |
+| Spaces | Routing audio to speakers (stereo, quad, etc. ) | stereo\_lr\_2~, quad~ |
 | Mixers | Fine tunning between direct sound and reverb | stereo\_lr\_rev~, quad\_rev~ |
 | Procesors | Filters, reverbs & other effects | rev~, rev\_del\_fbk~, rev\_conv~, fil\_bp~, pitch\_shift~ |
 | Miscelaneous (misc) | Test audio systems or functionalities | test\_quad~ , test\_OSC |
