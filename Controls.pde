@@ -115,13 +115,16 @@ public static class Controls {
     if (withNew) { 
       filenames = append(filenames, "<NEW>");
     } 
-    
-    for (String file :  folder.list()) {
+    try {
+			for (String file :  folder.list()) {
         // Check if string ends with extension
         if (file.endsWith(ext)) {
           filenames = append(filenames, file.replace(".tr", ""));        
         }
-    }
+    	}
+		} catch (Exception e) {
+			println("Controls.getFileList : /traj folder doesn't exist or there are no files in it");
+		}    
     
     return filenames;
   }
