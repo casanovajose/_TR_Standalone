@@ -4,3 +4,5 @@ pd/recordings
 out/
 .vscode
 current_scene.png
+traj/
+!traj/.keep

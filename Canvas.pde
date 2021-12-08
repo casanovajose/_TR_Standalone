@@ -42,8 +42,9 @@ class Canvas {
   void drawScene() {
     try {
       image(scene.sceneRevB, x, y);      
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception _e) {
+			println("The scene cannot be loaded");
+      //e.printStackTrace();
     }
   }
 

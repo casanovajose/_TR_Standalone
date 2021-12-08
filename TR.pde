@@ -96,7 +96,13 @@ void setup() {
   saveDefault = loadImage("icons/save_g.png");
   saveActive = loadImage("icons/save_ga.png");
   clearDefault = loadImage("icons/clear_g.png");
-  clearActive = loadImage("icons/clear_ga.png");  
+  clearActive = loadImage("icons/clear_ga.png"); 
+
+	// NETWORK
+	// listening port 
+	oscP5 = new OscP5(this, 6667);  
+	// sending port
+	myRemoteLocation = new NetAddress("127.0.0.1", 6666);
   
   // GUI
    cp5 = new ControlP5(this);
@@ -128,11 +134,7 @@ void setup() {
   sceneList = Controls.getRadioOptions(cp5,"sceneList", path+"/data/scenes", "", false, "default", 8);
    
   
-  // NETWORK
-  // listening port 
-  oscP5 = new OscP5(this, 667);  
-  // sending port
-  myRemoteLocation = new NetAddress("127.0.0.1", 666);
+
   
   // surface.setResizable(true);
   c = createGraphics(500, 500, P2D);
@@ -319,7 +321,7 @@ void trajTimer() {
       if (ti >= traj.size()) {				
 				ti = 0;				
 			}
-      if(canvas.traj.size() > 0) {        
+      if(canvas.traj.size() > 0) {
         oscP5.send(canvas.traj.get(ti), myRemoteLocation);
         ti++;
         lastEvent = millis();
