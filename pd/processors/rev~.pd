@@ -1,4 +1,4 @@
-#N canvas 252 49 845 566 10;
+#N canvas 306 491 845 566 10;
 #X obj 247 337 freeverb~;
 #X obj 250 30 loadbang;
 #X msg 217 106 print;
@@ -17,21 +17,22 @@
 #X obj 170 110 / 100;
 #X obj 120 310 pack 0 20;
 #X obj 310 350 pack 0 20;
-#X obj 660 320 tgl 15 0 empty empty FREEZE 17 7 0 10 #fcfcfc #000000
-#000000 1 1;
-#X obj 740 245 vsl 15 100 0 127 0 0 empty empty amp 0 -9 0 10 #fcfcfc
-#000000 #000000 9200 1;
+#X obj 694 280 tgl 15 0 empty empty FREEZE 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 668 251 vsl 10 80 0 127 0 0 empty empty amp 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X msg 340 260 freeze \$1;
 #X obj 700 64 inlet;
 #X msg 590 120 roomsize \$1;
-#X obj 610 70 inlet;
-#X obj 627 240 vsl 15 100 0 0.9 0 0 empty empty room 0 -9 0 10 #fcfcfc
-#000000 #000000 0 1;
+#X obj 580 20 inlet;
+#X obj 624 251 vsl 10 80 0 0.9 0 0 empty empty room 0 -9 0 10 #fcfcfc
+#000000 #000000 6320 1;
 #X msg 490 120 damping \$1;
-#X obj 580 240 vsl 15 100 0 0.9 0 0 empty empty damping 0 -9 0 10 #fcfcfc
-#000000 #000000 0 1;
+#X obj 577 251 vsl 10 80 0 0.9 0 0 empty empty damping 0 -9 0 10 #fcfcfc
+#000000 #000000 4400 1;
 #X msg 250 70 wet 0.9 \, damping 0.1 \, dry 0 \, roomsize 0.65 \, width
 1;
+#X obj 640 20 inlet;
 #X connect 0 0 3 0;
 #X connect 0 1 9 0;
 #X connect 1 0 27 0;
@@ -56,8 +57,12 @@
 #X connect 20 0 0 0;
 #X connect 21 0 18 0;
 #X connect 22 0 0 0;
+#X connect 23 0 25 0;
+#X connect 23 0 26 0;
 #X connect 24 0 22 0;
 #X connect 25 0 0 0;
 #X connect 26 0 25 0;
 #X connect 27 0 0 0;
-#X coords 0 -1 1 1 272 148 1 498 212;
+#X connect 28 0 22 0;
+#X connect 28 0 24 0;
+#X coords 0 -1 1 1 190 138 1 567 207;
