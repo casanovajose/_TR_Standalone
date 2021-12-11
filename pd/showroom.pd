@@ -1,0 +1,10 @@
+#N canvas 1992 64 1848 991 12;
+#X obj 40 60 controllers/simple_OSC;
+#X obj 40 110 controllers/simple_OSC_quad;
+#X obj 40 160 controllers/list_traj;
+#X obj 40 393 controllers/sequencer16;
+#X obj 540 130 generators/soundfile~;
+#X obj 540 210 generators/fm_phase~;
+#X obj 860 60 generators/additive~;
+#X obj 600 600 spaces/stereo_lr~;
+#X obj 840 600 spaces/quad~;

@@ -1,11 +1,11 @@
-#N canvas 299 45 751 574 10;
+#N canvas 1169 439 751 574 10;
 #X obj 102 350 readsf~;
 #X obj 102 210 openpanel;
-#X obj 105 66 bng 12 250 50 0 empty empty Open 13 5 0 8 #fcfcfc #000000
+#X obj 105 66 bng 15 250 50 0 empty empty OPEN 16 5 0 10 #fcfcfc #000000
 #000000;
 #X msg 159 168 start;
 #X msg 321 222 stop;
-#X obj 151 66 tgl 12 0 empty empty Play 13 5 0 10 #fcfcfc #000000 #000000
+#X obj 151 66 tgl 15 0 empty empty PLAY 16 5 0 10 #fcfcfc #000000 #000000
 0 1;
 #X obj 159 136 sel 1 0;
 #X obj 102 231 prepend open;
@@ -17,7 +17,7 @@
 #X obj 32 166 delay 20;
 #X obj 287 144 gate;
 #X msg 33 193 start;
-#X obj 197 66 tgl 12 1 empty empty Loop 13 5 0 10 #fcfcfc #000000 #000000
+#X obj 197 66 tgl 15 1 empty empty LOOP 16 5 0 10 #fcfcfc #000000 #000000
 0 1;
 #X obj 102 447 outlet~;
 #X obj 152 447 s~ \$0-archivodeaudio;
@@ -59,4 +59,4 @@ partir de curvas notables;
 #X connect 22 0 0 0;
 #X connect 23 0 25 0;
 #X connect 25 0 1 0;
-#X coords 0 -1 1 1 144 40 1 97 43;
+#X coords 0 -1 1 1 146 46 1 97 43;
