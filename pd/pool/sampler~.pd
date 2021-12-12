@@ -1,0 +1,23 @@
+#N canvas -8 -8 1366 680 10;
+#X obj 888 71 table \$0-s1;
+#X obj 233 130 tabwrite~ \$0-s1;
+#X obj 240 64 adc~;
+#X obj 296 67 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X msg 327 65 stop;
+#X obj 646 100 soundfiler;
+#X obj 130 160 dac~;
+#X obj 141 24 phasor~ 100;
+#X msg 646 73 read -resize \$1 \$0-s1;
+#X obj 646 170 soundfiler;
+#X obj 644 240 soundfiler;
+#X obj 965 71 table \$0-s2;
+#X obj 1041 71 table \$0-s3;
+#X msg 646 142 read -resize \$1 \$0-s2;
+#X msg 644 213 read -resize \$1 \$0-s3;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 8 0 5 0;
+#X connect 13 0 9 0;
+#X connect 14 0 10 0;
