@@ -131,7 +131,7 @@ void setup() {
   clearButton = Controls.getButton(cp5, "clearButton", clearDefault, clearActive, Controls.column + Controls.itmWidth + 30 , 2, 2);
   trajList = Controls.getRadioOptions(cp5, "trajList", path+"/traj", ".tr", true, "<NEW>", 3);
   // separator
-  sceneList = Controls.getRadioOptions(cp5,"sceneList", path+"/data/scenes", "", false, "default", 8);
+  sceneList = Controls.getRadioOptions(cp5,"sceneList", path+"/data/scenes", "", false, "st", 8);
    
   
 

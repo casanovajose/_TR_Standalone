@@ -13,7 +13,7 @@ class Scene {
   PImage sceneMap = null;
 
   Scene() {
-    loadScene("default");
+    loadScene("st");
   }
   
   void loadScene(String name) {
@@ -93,12 +93,16 @@ class Scene {
   public String[] getFileList(String path) {
     java.io.File folder = new java.io.File(path);
     String[] filenames = {};
-    
-    for (String file :  folder.list()) {
-        // Check if string ends with extension
+    println(path);
+    try {
+      for (String file :  folder.list()) {
+        // Check if string ends with extension        
         if (!file.startsWith("map")) {
           filenames = append(filenames, file);        
         }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
     
     return filenames;

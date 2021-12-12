@@ -40,7 +40,12 @@ public static class Controls {
     for(int i = 0; i < items.length; i++) {
       ddl.addItem(items[i], i);
     }
-    ddl.activate(selected);
+    try {
+      ddl.activate(selected);
+    } catch (Exception e) {
+      println("Cannot select default scene");
+    }
+    
     return ddl;
   }
   
