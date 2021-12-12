@@ -5,6 +5,12 @@
 #X obj 40 393 controllers/sequencer16;
 #X obj 540 130 generators/soundfile~;
 #X obj 540 210 generators/fm_phase~;
-#X obj 860 60 generators/additive~;
+#X obj 980 80 generators/additive~;
 #X obj 600 600 spaces/stereo_lr~;
 #X obj 840 600 spaces/quad~;
+#X obj 1240 560 mixers/quad_rev~;
+#X obj 1240 722 mixers/stereo_lr_rev~;
+#X obj 900 540 dac~;
+#X obj 803 443 adc~;
+#X connect 6 0 11 0;
+#X connect 6 0 11 1;

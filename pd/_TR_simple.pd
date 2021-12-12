@@ -1,4 +1,4 @@
-#N canvas 194 433 1652 878 12;
+#N canvas 194 421 1652 903 12;
 #X obj 45 50 generators/soundfile~;
 #X obj 278 283 processors/rev~;
 #X msg 423 228 0.8;

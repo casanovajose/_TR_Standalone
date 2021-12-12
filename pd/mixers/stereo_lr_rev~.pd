@@ -1,4 +1,4 @@
-#N canvas 201 62 947 434 12;
+#N canvas 201 421 947 434 12;
 #X obj 410 270 pvu~;
 #X obj 360 270 pvu~;
 #X obj 170 80 inlet~;
@@ -27,13 +27,13 @@
 #X text 490 140 revR;
 #X obj 170 220 *~ 1;
 #X obj 230 220 *~ 1;
-#X obj 835 96 vu 10 80 visual_vu_R R -1 -8 0 10 #404040 #000000 1 0
-;
-#X obj 774 96 vu 10 80 visual_vu_L L -4 -8 0 10 #404040 #000000 1 0
-;
-#X obj 672 96 vsl 10 80 0 0.95 0 0 main_amp empty SRC 0 -9 0 10 #fcfcfc
+#X obj 835 103 vu 10 80 visual_vu_R R -1 -8 0 10 #404040 #000000 1
+0;
+#X obj 774 103 vu 10 80 visual_vu_L L -4 -8 0 10 #404040 #000000 1
+0;
+#X obj 672 103 vsl 10 80 0 0.95 0 0 main_amp empty SRC 0 -9 0 10 #fcfcfc
 #000000 #000000 0 1;
-#X obj 724 96 vsl 10 80 0 0.95 0 0 rev_amp empty REV 0 -9 0 10 #fcfcfc
+#X obj 724 103 vsl 10 80 0 0.95 0 0 rev_amp empty REV 0 -9 0 10 #fcfcfc
 #000000 #000000 0 1;
 #X connect 0 0 6 0;
 #X connect 0 0 28 1;
@@ -61,4 +61,4 @@
 #X connect 27 0 4 0;
 #X connect 30 0 13 0;
 #X connect 31 0 22 0;
-#X coords 0 -1 1 1 229 130 1 655 64;
+#X coords 0 -1 1 1 229 134 1 655 64;

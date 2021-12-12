@@ -1,82 +1,82 @@
 #N canvas 0 421 1920 1018 10;
-#X obj 311 177 vsl 8 70 0 0.8 0 1 vol1 vol1 1 0 -9 0 10 #ffffff #000000
-#000000 6900 1;
-#X obj 305 331 vsl 8 65 0 7000 0 0 A1 A1 A1 0 -9 0 10 #ffffff #000000
-#000000 702 1;
-#X obj 321 331 vsl 8 65 0 7000 0 0 D1 D1 D1 0 -9 0 10 #ffffff #000000
-#000000 4683 1;
-#X obj 336 331 vsl 8 65 0 100 0 0 S1 S1 S1 0 -9 0 10 #ffffff #000000
-#000000 5120 1;
-#X obj 352 331 vsl 8 65 0 7000 0 0 R1 R1 R1 0 -9 0 10 #ffffff #000000
-#000000 549 1;
-#X obj 380 330 nbx 5 14 0 7000 0 1 A1 A1 A1 -13 8 0 10 #ffffff #000000
-#000000 767.812 256 0;
-#X obj 380 347 nbx 5 14 0 7000 0 1 D1 D1 D1 -13 8 0 10 #ffffff #000000
-#000000 5122.03 256 0;
-#X obj 380 364 nbx 5 14 0 100 0 1 S1 S1 S1 -13 8 0 10 #ffffff #000000
-#000000 80 256 0;
-#X obj 380 381 nbx 5 14 0 7000 0 1 R1 R1 R1 -13 8 0 10 #ffffff #000000
-#000000 600 256 0;
-#X obj 310 267 hsl 40 8 -40 40 0 0 DET1 DET1 det 10 -8 0 10 #ffffff
-#000000 #000000 1950 1;
-#X obj 313 279 nbx 3 10 -40 40 0 1 DET1 DET1 empty 0 -8 0 10 #fcfcfc
+#X obj 311 177 vsl 8 70 0 0.8 0 1 \$0-vol1 empty 1 0 -9 0 10 #ffffff
+#000000 #000000 6900 1;
+#X obj 305 331 vsl 8 65 0 7000 0 0 \$0-A1 \$0-A1 A1 0 -9 0 10 #ffffff
+#000000 #000000 183 1;
+#X obj 321 331 vsl 8 65 0 7000 0 0 \$0-D1 \$0-D1 D1 0 -9 0 10 #ffffff
+#000000 #000000 469 1;
+#X obj 336 331 vsl 8 65 0 100 0 0 \$0-S1 \$0-S1 S1 0 -9 0 10 #ffffff
+#000000 #000000 1220 1;
+#X obj 352 331 vsl 8 65 0 7000 0 0 \$0-R1 \$0-R1 R1 0 -9 0 10 #ffffff
+#000000 #000000 750 1;
+#X obj 380 330 nbx 5 14 0 7000 0 1 \$0-A1 \$0-A1 A1 -13 8 0 10 #ffffff
+#000000 #000000 200 256 0;
+#X obj 380 347 nbx 5 14 0 7000 0 1 \$0-D1 \$0-D1 D1 -13 8 0 10 #ffffff
+#000000 #000000 513.281 256 0;
+#X obj 380 364 nbx 5 14 0 100 0 1 \$0-S1 \$0-S1 S1 -13 8 0 10 #ffffff
+#000000 #000000 19.0625 256 0;
+#X obj 380 381 nbx 5 14 0 7000 0 1 \$0-R1 \$0-R1 R1 -13 8 0 10 #ffffff
+#000000 #000000 820.312 256 0;
+#X obj 310 267 hsl 40 8 -40 40 0 0 \$0-DET1 empty det 10 -8 0 10 #ffffff
+#000000 #000000 0 1;
+#X obj 313 279 nbx 3 10 -40 40 0 1 empty empty empty 0 -8 0 10 #fcfcfc
 #000000 #000000 0 256 0;
-#X obj 320 240 nbx 3 10 0 1 0 0 vol1 vol1 empty 0 -8 0 10 #fcfcfc #000000
-#000000 0.8 256 0;
+#X obj 320 240 nbx 3 10 0 1 0 0 empty \$0-vol empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0 256 0;
 #X obj 307 153 nbx 3 10 1 20 0 1 \$0-NRO1 empty arm 0 -8 0 10 #ffffff
 #000000 #000000 1 256 0;
-#X obj 385 178 vsl 8 70 0 0.8 0 1 vol2 vol2 2 0 -9 0 10 #ffffff #000000
-#000000 6200 1;
-#X obj 384 268 hsl 40 8 -40 40 0 0 DET2 DET2 det 10 -8 0 10 #ffffff
+#X obj 385 178 vsl 8 70 0 0.8 0 1 \$0-vol2 \$0-vol2 2 0 -9 0 10 #ffffff
+#000000 #000000 3300 1;
+#X obj 384 268 hsl 40 8 -40 40 0 0 \$0-DET2 \$0-DET2 det 10 -8 0 10
+#ffffff #000000 #000000 1500 1;
+#X obj 387 280 nbx 3 10 -40 40 0 1 \$0-DET2 \$0-DET2 empty 0 -8 0 10
+#fcfcfc #000000 #000000 -9.23077 256 0;
+#X obj 394 241 nbx 3 10 0 1 0 0 \$0-vol2 \$0-vol2 empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0.382609 256 0;
+#X obj 381 154 nbx 3 10 1 20 0 1 \$0-NRO2 empty arm 0 -8 0 10 #ffffff
+#000000 #000000 2 256 0;
+#X obj 456 176 vsl 8 70 0 0.8 0 1 \$0-vol3 \$0-vol3 3 0 -9 0 10 #ffffff
 #000000 #000000 450 1;
-#X obj 387 280 nbx 3 10 -40 40 0 1 DET2 DET2 empty 0 -8 0 10 #fcfcfc
-#000000 #000000 -30.7692 256 0;
-#X obj 394 241 nbx 3 10 0 1 0 0 vol2 vol2 empty 0 -8 0 10 #fcfcfc #000000
-#000000 0.718841 256 0;
-#X obj 381 154 nbx 3 10 1 20 0 1 NRO2 empty arm 0 -8 0 10 #ffffff #000000
-#000000 2 256 0;
-#X obj 456 176 vsl 8 70 0 0.8 0 1 vol3 vol3 3 0 -9 0 10 #ffffff #000000
-#000000 4300 1;
-#X obj 455 266 hsl 40 8 -40 40 0 0 DET3 DET3 det 10 -8 0 10 #ffffff
-#000000 #000000 2650 1;
-#X obj 458 278 nbx 3 10 -40 40 0 1 DET3 DET3 empty 0 -8 0 10 #fcfcfc
-#000000 #000000 14.359 256 0;
-#X obj 465 239 nbx 3 10 0 1 0 0 vol3 vol3 empty 0 -8 0 10 #fcfcfc #000000
-#000000 0.498551 256 0;
-#X obj 452 152 nbx 3 10 1 20 0 1 NRO3 empty arm 0 -8 0 10 #ffffff #000000
-#000000 3 256 0;
-#X obj 449 332 vsl 8 65 0 7000 0 0 A2 A2 A2 0 -9 0 10 #ffffff #000000
-#000000 2691 1;
-#X obj 465 332 vsl 8 65 0 7000 0 0 D2 D2 D2 0 -9 0 10 #ffffff #000000
-#000000 274 1;
-#X obj 480 332 vsl 8 65 0 100 0 0 S2 S2 S2 0 -9 0 10 #ffffff #000000
-#000000 5760 1;
-#X obj 496 332 vsl 8 65 0 7000 0 0 R2 R2 R2 0 -9 0 10 #ffffff #000000
-#000000 731 1;
-#X obj 524 331 nbx 5 14 0 7000 0 1 A2 A2 A2 -13 8 0 10 #ffffff #000000
-#000000 2943.28 256 0;
-#X obj 524 348 nbx 5 14 0 7000 0 1 D2 D2 D2 -13 8 0 10 #ffffff #000000
-#000000 300 256 0;
-#X obj 524 365 nbx 5 14 0 100 0 1 S2 S2 S2 -13 8 0 10 #ffffff #000000
-#000000 90 256 0;
-#X obj 524 382 nbx 5 14 0 7000 0 1 R2 R2 R2 -13 8 0 10 #ffffff #000000
-#000000 800 256 0;
-#X obj 593 334 vsl 8 65 0 7000 0 0 A3 A3 A3 0 -9 0 10 #ffffff #000000
-#000000 549 1;
-#X obj 609 334 vsl 8 65 0 7000 0 0 D3 D3 D3 0 -9 0 10 #ffffff #000000
-#000000 0 1;
-#X obj 624 334 vsl 8 65 0 100 0 0 S3 S3 S3 0 -9 0 10 #ffffff #000000
-#000000 2800 1;
-#X obj 640 334 vsl 8 65 0 7000 0 0 R3 R3 R3 0 -9 0 10 #ffffff #000000
-#000000 640 1;
-#X obj 668 333 nbx 5 14 0 7000 0 1 A3 A3 A3 -13 8 0 10 #ffffff #000000
-#000000 600 256 0;
-#X obj 668 350 nbx 5 14 0 7000 0 1 D3 D3 D3 -13 8 0 10 #ffffff #000000
-#000000 0 256 0;
-#X obj 668 368 nbx 5 14 0 100 0 1 S3 S3 S3 -13 8 0 10 #ffffff #000000
-#000000 43.75 256 0;
-#X obj 668 385 nbx 5 14 0 7000 0 1 R3 R3 R3 -13 8 0 10 #ffffff #000000
-#000000 700 256 0;
+#X obj 455 266 hsl 40 8 -40 40 0 0 \$0-DET3 \$0-DET3 det 10 -8 0 10
+#ffffff #000000 #000000 2300 1;
+#X obj 458 278 nbx 3 10 -40 40 0 1 \$0-DET3 \$0-DET3 empty 0 -8 0 10
+#fcfcfc #000000 #000000 7.17949 256 0;
+#X obj 465 239 nbx 3 10 0 1 0 0 \$0-vol3 \$0-vol3 empty 0 -8 0 10 #fcfcfc
+#000000 #000000 0.0521739 256 0;
+#X obj 452 152 nbx 3 10 1 20 0 1 \$0-NRO3 empty arm 0 -8 0 10 #ffffff
+#000000 #000000 3 256 0;
+#X obj 449 332 vsl 8 65 0 7000 0 0 \$0-A2 \$0-A2 A2 0 -9 0 10 #ffffff
+#000000 #000000 256 1;
+#X obj 465 332 vsl 8 65 0 7000 0 0 \$0-D2 \$0-D2 D2 0 -9 0 10 #ffffff
+#000000 #000000 46 1;
+#X obj 480 332 vsl 8 65 0 100 0 0 \$0-S2 \$0-S2 S2 0 -9 0 10 #ffffff
+#000000 #000000 4360 1;
+#X obj 496 332 vsl 8 65 0 7000 0 0 \$0-R2 \$0-R2 R2 0 -9 0 10 #ffffff
+#000000 #000000 91 1;
+#X obj 524 331 nbx 5 14 0 7000 0 1 \$0-A2 \$0-A2 A2 -13 8 0 10 #ffffff
+#000000 #000000 280.125 256 0;
+#X obj 524 348 nbx 5 14 0 7000 0 1 \$0-D2 \$0-D2 D2 -13 8 0 10 #ffffff
+#000000 #000000 50 256 0;
+#X obj 524 365 nbx 5 14 0 100 0 1 \$0-S2 \$0-S2 S2 -13 8 0 10 #ffffff
+#000000 #000000 68.125 256 0;
+#X obj 524 382 nbx 5 14 0 7000 0 1 \$0-R2 \$0-R2 R2 -13 8 0 10 #ffffff
+#000000 #000000 100 256 0;
+#X obj 593 334 vsl 8 65 0 7000 0 0 \$0-A3 \$0-A3 A3 0 -9 0 10 #ffffff
+#000000 #000000 269 1;
+#X obj 609 334 vsl 8 65 0 7000 0 0 \$0-D3 \$0-D3 D3 0 -9 0 10 #ffffff
+#000000 #000000 11 1;
+#X obj 624 334 vsl 8 65 0 100 0 0 \$0-S3 \$0-S3 S3 0 -9 0 10 #ffffff
+#000000 #000000 1680 1;
+#X obj 640 334 vsl 8 65 0 7000 0 0 \$0-R3 \$0-R3 R3 0 -9 0 10 #ffffff
+#000000 #000000 490 1;
+#X obj 668 333 nbx 5 14 0 7000 0 1 \$0-A3 \$0-A3 A3 -13 8 0 10 #ffffff
+#000000 #000000 294 256 0;
+#X obj 668 350 nbx 5 14 0 7000 0 1 \$0-D3 \$0-D3 D3 -13 8 0 10 #ffffff
+#000000 #000000 12 256 0;
+#X obj 668 368 nbx 5 14 0 100 0 1 \$0-S3 \$0-S3 S3 -13 8 0 10 #ffffff
+#000000 #000000 26.25 256 0;
+#X obj 668 385 nbx 5 14 0 7000 0 1 \$0-R3 \$0-R3 R3 -13 8 0 10 #ffffff
+#000000 #000000 535.938 256 0;
 #X obj 528 176 vsl 8 70 0 0.8 0 1 vol4 vol4 4 0 -9 0 10 #ffffff #000000
 #000000 4400 1;
 #X obj 527 266 hsl 40 8 -40 40 0 0 DET4 DET4 det 10 -8 0 10 #ffffff
@@ -182,7 +182,7 @@
 #X obj 810 384 nbx 5 14 0 7000 0 1 R4 R4 R4 -13 8 0 10 #ffffff #000000
 #000000 2078.12 256 0;
 #X obj 800 430 vsl 8 65 0 127 0 0 \$0-amp empty AMP 0 -9 0 10 #ffffff
-#000000 #000000 0 1;
+#000000 #000000 4500 1;
 #X obj 280 24 inlet;
 #X obj 370 24 inlet;
 #X obj 460 24 inlet;
@@ -196,32 +196,115 @@
 #X obj 281 74 s \$0-noteon;
 #X obj 1218 179 *~;
 #X floatatom 1237 136 5 0 0 0 - - -, f 5;
-#X obj 1050 114 r~ outoscilador1;
-#X obj 1067 155 r~ outoscilador3;
-#X obj 1076 176 r~ outoscilador4;
-#X obj 1087 197 r~ outoscilador5;
-#X obj 1090 220 r~ outoscilador6;
-#X obj 1090 240 r~ outoscilador7;
-#X obj 1058 134 r~ outoscilador2;
 #X obj 1289 137 loadbang;
-#X msg 1293 175 0.5;
 #X obj 1220 250 gainvu~;
-#X connect 91 0 112 1;
+#X floatatom 420 770 5 0 0 0 HARM #0-NRO1 -, f 5;
+#X obj 389 740 adsr 0.6 200 300 70 900;
+#X msg 376 688 0;
+#X floatatom 442 646 5 0 0 0 A #0-A1 -, f 5;
+#X floatatom 470 671 5 0 0 0 D #0-D1 -, f 5;
+#X floatatom 495 692 5 0 0 0 S #0-S1 -, f 5;
+#X floatatom 519 711 5 0 0 0 R #0-R1 -, f 5;
+#X floatatom 416 713 5 0 0 0 vol #0-vol1 -, f 5;
+#X floatatom 461 796 5 0 0 0 detune #0-DET1 -, f 5;
+#X msg 409 686 1;
+#X obj 343 625 r \$0-noteon;
+#X obj 340 650 r \$0-noteoff;
+#X obj 371 819 oscilator~;
+#X obj 371 842 s~ \$0-outoscilador1;
+#X text 339 598 OSCILATOR 1;
+#X floatatom 682 764 5 0 0 0 HARM #0-NRO2 -, f 5;
+#X obj 651 734 adsr 0.6 200 300 70 900;
+#X msg 638 682 0;
+#X floatatom 704 640 5 0 0 0 A #0-A2 -, f 5;
+#X floatatom 732 665 5 0 0 0 D #0-D2 -, f 5;
+#X floatatom 757 686 5 0 0 0 S #0-S2 -, f 5;
+#X floatatom 781 705 5 0 0 0 R #0-R2 -, f 5;
+#X floatatom 678 707 5 0 0 0 vol #0-vol2 -, f 5;
+#X floatatom 723 790 5 0 0 0 detune #0-DET2 -, f 5;
+#X msg 671 680 1;
+#X obj 605 619 r \$0-noteon;
+#X obj 602 644 r \$0-noteoff;
+#X obj 633 813 oscilator~;
+#X text 601 592 OSCILATOR 2;
+#X obj 633 836 s~ \$0-outoscilador2;
+#X obj 1050 114 r~ \$0-outoscilador1;
+#X obj 1058 134 r~ \$0-outoscilador2;
+#X floatatom 610 60 5 0 0 0 - - -, f 5;
+#X obj 320 780 r \$0-note;
+#X msg 1294 175 0.15;
+#X obj 580 770 r \$0-note;
+#X floatatom 972 754 5 0 0 0 HARM #0-NRO3 -, f 5;
+#X obj 941 724 adsr 0.6 200 300 70 900;
+#X msg 928 672 0;
+#X floatatom 994 630 5 0 0 0 A #0-A3 -, f 5;
+#X floatatom 1022 655 5 0 0 0 D #0-D3 -, f 5;
+#X floatatom 1047 676 5 0 0 0 S #0-S3 -, f 5;
+#X floatatom 1071 695 5 0 0 0 R #0-R3 -, f 5;
+#X floatatom 968 697 5 0 0 0 vol #0-vol3 -, f 5;
+#X floatatom 1013 780 5 0 0 0 detune #0-DET3 -, f 5;
+#X msg 961 670 1;
+#X obj 895 609 r \$0-noteon;
+#X obj 892 634 r \$0-noteoff;
+#X obj 923 803 oscilator~;
+#X obj 870 760 r \$0-note;
+#X obj 923 826 s~ \$0-outoscilador3;
+#X text 891 582 OSCILATOR 3;
+#X obj 1060 180 r~ \$0-outoscilador3;
+#X connect 91 0 104 1;
 #X connect 92 0 96 0;
 #X connect 93 0 97 0;
 #X connect 94 0 98 0;
 #X connect 96 0 100 0;
 #X connect 97 0 99 0;
-#X connect 101 0 112 0;
+#X connect 101 0 104 0;
 #X connect 102 0 101 1;
-#X connect 103 0 101 0;
-#X connect 104 0 101 0;
-#X connect 105 0 101 0;
-#X connect 106 0 101 0;
-#X connect 107 0 101 0;
-#X connect 108 0 101 0;
-#X connect 109 0 101 0;
-#X connect 110 0 111 0;
-#X connect 111 0 102 0;
-#X connect 112 0 95 0;
+#X connect 103 0 139 0;
+#X connect 104 0 95 0;
+#X connect 105 0 117 2;
+#X connect 106 0 117 1;
+#X connect 107 0 106 0;
+#X connect 108 0 106 2;
+#X connect 109 0 106 3;
+#X connect 110 0 106 4;
+#X connect 111 0 106 5;
+#X connect 112 0 106 1;
+#X connect 113 0 117 3;
+#X connect 114 0 106 0;
+#X connect 115 0 114 0;
+#X connect 116 0 107 0;
+#X connect 117 0 118 0;
+#X connect 120 0 132 2;
+#X connect 121 0 132 1;
+#X connect 122 0 121 0;
+#X connect 123 0 121 2;
+#X connect 124 0 121 3;
+#X connect 125 0 121 4;
+#X connect 126 0 121 5;
+#X connect 127 0 121 1;
+#X connect 128 0 132 3;
+#X connect 129 0 121 0;
+#X connect 130 0 129 0;
+#X connect 131 0 122 0;
+#X connect 132 0 134 0;
+#X connect 135 0 101 0;
+#X connect 136 0 101 0;
+#X connect 138 0 117 0;
+#X connect 139 0 102 0;
+#X connect 140 0 132 0;
+#X connect 141 0 153 2;
+#X connect 142 0 153 1;
+#X connect 143 0 142 0;
+#X connect 144 0 142 2;
+#X connect 145 0 142 3;
+#X connect 146 0 142 4;
+#X connect 147 0 142 5;
+#X connect 148 0 142 1;
+#X connect 149 0 153 3;
+#X connect 150 0 142 0;
+#X connect 151 0 150 0;
+#X connect 152 0 143 0;
+#X connect 153 0 155 0;
+#X connect 154 0 153 0;
+#X connect 157 0 101 0;
 #X coords 0 -1 1 1 594 400 1 285 114;
