@@ -1,0 +1,41 @@
+#N canvas 0 421 1920 1018 12;
+#X obj 783 -107 controllers/sequencer16;
+#X obj 780 150 generators/additive~;
+#X obj 40 700 dac~;
+#X obj 20 170 spaces/stereo_lr~;
+#X obj 30 -20 controllers/simple_OSC;
+#X obj 300 90 processors/rev~;
+#X obj 20 480 mixers/stereo_lr_rev~;
+#X obj 300 260 processors/rev~;
+#X obj 110 -110 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 783 73 moses 10;
+#X obj 784 105 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 834 105 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 849 73 5 0 0 0 - - -, f 5;
+#X obj 780 570 s~ add_synth;
+#X obj 240 30 r~ add_synth;
+#X connect 0 0 9 0;
+#X connect 1 0 13 0;
+#X connect 3 0 6 0;
+#X connect 3 1 6 1;
+#X connect 4 5 3 1;
+#X connect 4 6 3 2;
+#X connect 4 7 7 1;
+#X connect 4 8 7 2;
+#X connect 5 0 7 0;
+#X connect 5 1 7 0;
+#X connect 6 0 2 0;
+#X connect 6 1 2 1;
+#X connect 7 0 6 3;
+#X connect 7 1 6 4;
+#X connect 9 0 10 0;
+#X connect 9 1 11 0;
+#X connect 9 1 12 0;
+#X connect 10 0 1 1;
+#X connect 11 0 1 0;
+#X connect 12 0 1 2;
+#X connect 14 0 5 0;
+#X connect 14 0 3 0;
