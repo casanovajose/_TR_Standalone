@@ -79,7 +79,7 @@ class Canvas {
       drawLine(cnv, p, first);
       // marks    
       // TODO modulo according speed
-      drawTextMarker(cnv);
+      drawTextMarker(cnv, p);
       // points
       drawLineMarker(cnv, p);
             
@@ -172,7 +172,8 @@ class Canvas {
       p.press = float(l[3]);
       boolean first = cmd.equals("START");
       points.add(p);
-      drawLine(cnv, p, first);      
+      drawLine(cnv, p, first);
+			drawTextMarker(cnv, p);
     }
     cnv.endDraw();    
     prev = cnv.copy();    
@@ -209,11 +210,11 @@ class Canvas {
     c.rect(0, 0, cnv.width-1, cnv.height-1);   
   }
   
-  void drawTextMarker(PGraphics c) {
+  void drawTextMarker(PGraphics c, Point p) {
     if (points.size() % 30 == 0) {
       c.fill(0, 10, 100); 
       c.textFont(font, 15);
-      c.text(m, mouseX-x, mouseY-y);
+      c.text(m, p.x, p.y);
       m++;
     }
   }
