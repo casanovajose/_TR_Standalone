@@ -1,5 +1,5 @@
-#N canvas 0 37 1350 590 12;
-#N canvas -827 -65 663 664 fft-analysis 1;
+#N canvas 570 475 1350 590 12;
+#N canvas 0 0 663 664 fft-analysis 0;
 #X obj 20 126 *~;
 #X obj 19 61 inlet~;
 #X obj 20 180 rfft~;
@@ -187,6 +187,7 @@ the file smaller (it doesn't have to be saved with the array.);
 #X obj 189 331 inlet;
 #X msg 197 366 const \$1;
 #X obj 500 496 inlet;
+#X text 701 163 WIP;
 #X connect 0 0 26 0;
 #X connect 5 0 8 0;
 #X connect 6 0 8 0;
